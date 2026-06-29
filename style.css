@@ -107,7 +107,7 @@ header button:hover{
   margin-right: 3%;
 }
 
-#previa svg {
+#previa li svg {
   width: 0.5in;
   height: 0.5in;
   vertical-align: middle;
@@ -116,7 +116,7 @@ header button:hover{
 
 #previa button{
   margin: 3%;
-  background-color: #c7c7c7;
+  background-color: #b22222;
   border: 3px solid black;
   border-radius: 3px;
 }
@@ -129,6 +129,54 @@ header button:hover{
 .dPrev{
   padding: 5%;
 }
+
+.preco{
+  color: red;
+}
+
+#pizzas{
+  width: 90%;
+  text-align: center;
+}
+
+
+#pizzas li{
+  list-style: none;
+  text-align: left;
+  padding-left: 3%;
+  padding-bottom: 1%;
+  box-shadow: 2px 2px 2px gray;
+  border-radius: 5px;
+  border-left: 3px solid red;
+}
+
+#pizzas li:hover{
+  box-shadow: 4px 4px 3px gray;
+  transform: scale(1.01);
+}
+
+#bebidas{
+  display: none;
+}
+ #sabores{
+  display: none;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Layout para telas menores (celular) */
 @media (max-width: 4in) {
@@ -150,5 +198,3 @@ header button:hover{
     width: 100%;
   }
 }
-
-
