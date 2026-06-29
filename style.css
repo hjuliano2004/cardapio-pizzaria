@@ -1,6 +1,4 @@
-#cartoes{
-    display: none;
-}
+
 
 /* Fonte para títulos */
 h1 {
@@ -17,6 +15,10 @@ h1 {
   height: 150px;
   object-fit: cover; /* mantém proporção da imagem */
   border-bottom: 5px solid #b22222; /* detalhe */
+}
+
+#endereco{
+    text-align: center;
 }
 
 /* Container principal */
@@ -63,22 +65,42 @@ header button:hover{
 /* Botão maps */
 #maps {
   text-decoration: none;
-  background-color: #b22222;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
-  color: white;
+  color: rgb(49, 49, 49);
   font-weight: bold;
   transition: background 0.3s;
 }
 
 #maps:hover {
-  background-color: #8b1a1a;
+  border: 1px solid black;
 }
 
 #cartao{
     width: 0.5in;
     height: 0.5in;
+}
+
+#previa{
+  border-radius: 5px;
+  background-color: white;
+  position: fixed;
+  display: block;
+  width: 50%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  left: 1%
+}
+#previa li{
+  list-style: none;
+}
+
+#previa button{
+  margin: 3%;
+}
+
+.dPrev{
+  padding: 5%;
 }
 
 /* Layout para telas menores (celular) */
@@ -96,4 +118,10 @@ header button:hover{
   header{
     width: 100%;
   }
+
+  #previa{
+    width: 100%;
+  }
 }
+
+

@@ -11,9 +11,24 @@
 <body>
 
 
-    <spam id="cartoes">
+    <section id="previa">
 
-    </spam>
+        <button id="btn-fecha-prev">x</button>
+
+        <ul class="dPrev">
+            <li>Dinheiro</li>
+            <li>Pix</li>
+            <li>Elo</li>
+            <li>Visa</li>
+            <li>Master</li>
+            <li>Hipercard</li>
+            
+        </ul>
+
+
+
+
+    </section>
 
     <header>
 
@@ -22,47 +37,43 @@
         <img id="imagem_destaque" src="./imagens/pizza.png">
 
         <h1>Papadeli</h1>
+        <div id="endereco">
+            <a id="maps" href="https://maps.app.goo.gl/vvwzj1gebsCKTkAu8">
+                Rua Tuiuti, 1270, Iririu, Joinville - SC, 89227-473
+            </a>
 
-        <section id="header">
-
-
-            <div>
-                <h4>formas de pagamento</h4>
-                <button><img id="cartao" src="./imagens/cartao.png">
-                </button>
-            </div>
-            <div>
-                <h4>Estimativa de entrega</h4>
-                <p>30min - 40min</p>
-            </div>
-
-            <div>
-                <h4>Estimativa de retirada</h4>
-                <p>30min</p>
-            </div>
-
-            <div><!--espaço vazio necessário--></div>
+            <section id="header">
 
 
-            <div>
-                <h4>Funcionamento</h4>
-                terça - domingo
-                <p id="funcionamento"></p>
-            </div>
+                <div>
+                    <h4>formas de pagamento</h4>
+                    <button id="prevPagamentos"><img id="cartao" src="./imagens/cartao.png">
+                    </button>
+                </div>
+                <div>
+                    <h4>Estimativa de entrega</h4>
+                    <p>30min - 40min</p>
+                </div>
 
-            <div>
-                <h4>Endereço</h4>
-                <p>Rua Tuiuti, 1270, Iririu, Joinville - SC, 89227-473</p>
-                <a id="maps" href="https://maps.app.goo.gl/vvwzj1gebsCKTkAu8">maps</a>
-            </div>
-        </section>
+                <div>
+                    <h4>Estimativa de retirada</h4>
+                    <p>30min</p>
+                </div>
+
+                <div><!--espaço vazio necessário--></div>
+
+
+                <div>
+                    <h4>Funcionamento</h4>
+                    terça - domingo
+                    <p id="funcionamento"></p>
+                </div>
+            </section>
+
+        </div>
     </header>
 
-
-
-
-
-<script type="module" src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 
 </html>
