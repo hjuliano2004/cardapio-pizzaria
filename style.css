@@ -41,7 +41,7 @@ header button:hover{
 
 /* Grid de informações */
 #header {
-  display: block;
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
   padding: 20px;
@@ -79,4 +79,21 @@ header button:hover{
 #cartao{
     width: 0.5in;
     height: 0.5in;
+}
+
+/* Layout para telas menores (celular) */
+@media (max-width: 4in) {
+
+
+  h1 {
+    font-size: 1.8rem; /* diminui o título */
+  }
+
+  #imagem_destaque {
+    height: 150px; /* reduz altura da imagem */
+  }
+
+  header{
+    width: 100%;
+  }
 }
