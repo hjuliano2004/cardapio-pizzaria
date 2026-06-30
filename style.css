@@ -1,11 +1,11 @@
-
-
 /* Fonte para títulos */
 h1 {
   text-align: center;
-  font-family: 'Playfair Display', serif; /* elegante e legível */
+  font-family: 'Playfair Display', serif;
+  /* elegante e legível */
   font-size: 2.5rem;
-  color: #b22222; /* vermelho pizza */
+  color: #b22222;
+  /* vermelho pizza */
   margin: 10px 0;
 }
 
@@ -13,12 +13,14 @@ h1 {
 #imagem_destaque {
   width: 100%;
   height: 150px;
-  object-fit: cover; /* mantém proporção da imagem */
-  border-bottom: 5px solid #b22222; /* detalhe */
+  object-fit: cover;
+  /* mantém proporção da imagem */
+  border-bottom: 5px solid #b22222;
+  /* detalhe */
 }
 
-#endereco{
-    text-align: center;
+#endereco {
+  text-align: center;
 }
 
 /* Container principal */
@@ -27,18 +29,20 @@ header {
   margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  background-color: #fff8f0; /* tom suave */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: #fff8f0;
+  /* tom suave */
 }
 
-header button{
-    background-color: white;
+header button {
+  background-color: white;
 }
-header button:hover{
-    box-shadow: 3px 3px 3px black;
-    cursor: pointer;
-    margin-bottom: 1%;
-    margin-top: -1%;
+
+header button:hover {
+  box-shadow: 3px 3px 3px black;
+  cursor: pointer;
+  margin-bottom: 1%;
+  margin-top: -1%;
 }
 
 /* Grid de informações */
@@ -52,7 +56,8 @@ header button:hover{
 }
 
 #header h4 {
-  font-family: 'Lobster', cursive; /* estilo artesanal */
+  font-family: 'Lobster', cursive;
+  /* estilo artesanal */
   color: #333;
   margin-bottom: 5px;
 }
@@ -77,31 +82,32 @@ header button:hover{
   border: 1px solid black;
 }
 
-#cartao{
-    width: 0.5in;
-    height: 0.5in;
+#cartao {
+  width: 0.5in;
+  height: 0.5in;
 }
 
-#previa{
+#previa {
   border-radius: 5px;
   background-color: white;
   position: fixed;
   display: none;
   width: 50%;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   left: 1%
 }
-#previa li{
+
+#previa li {
   list-style: none;
   border: 1px solid gray;
   border-top: 0px;
   border-left: 0px;
   border-right: 0px;
-  font-size:xx-large;
+  font-size: xx-large;
   vertical-align: middle;
 }
 
-#previa li img{
+#previa li img {
   width: 0.5in;
   vertical-align: middle;
   margin-right: 3%;
@@ -114,33 +120,33 @@ header button:hover{
   margin-right: 3%;
 }
 
-#previa button{
+#previa button {
   margin: 3%;
   background-color: #b22222;
   border: 3px solid black;
   border-radius: 3px;
 }
 
-#dupla-esquerda{
+#dupla-esquerda {
   width: 0.3in;
   height: 0.3in;
 }
 
-.dPrev{
+.dPrev {
   padding: 5%;
 }
 
-.preco{
+.preco {
   color: red;
 }
 
-#pizzas{
+#pizzas {
   width: 90%;
   text-align: center;
 }
 
 
-#pizzas li{
+#pizzas li {
   list-style: none;
   text-align: left;
   padding-left: 3%;
@@ -150,27 +156,95 @@ header button:hover{
   border-left: 3px solid red;
 }
 
-#pizzas li:hover{
+#pizzas li:hover {
   box-shadow: 4px 4px 3px gray;
   transform: scale(1.01);
 }
 
-#bebidas{
+#bebidas {
   display: none;
 }
- #sabores{
+
+#sabores {
   display: none;
- }
+}
+
+.retorno {
+
+  width: 0.3in;
+  height: 0.3in;
+}
+
+.barra_superior {
+  background-color: rgb(255, 217, 0);
+  display: flex;
+  /* ativa flexbox */
+  align-items: center;
+  /* alinha verticalmente */
+  justify-content: space-between;
+  /* distribui: botão à esquerda, h3 centralizado */
+  padding: 0 10px;
+}
+
+.barra_superior h3 {
+  flex: 1;
+  /* ocupa espaço central */
+  text-align: center;
+  /* centraliza o texto dentro do espaço */
+}
+
+.barra_superior button {
+  flex: 0;
+  /* não cresce, fica fixo */
+  background-color: transparent;
+  border: 0px solid;
+}
 
 
 
+.inferior {
+  position: fixed;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: -1px -1px 3px;
+  width: 90%;
+  transform: translateX(-50%);
+  left: 50%;
+  bottom: 1%;
 
+  padding: 1%;
+}
 
+.inferior p {
+  text-align: center;
+}
 
+.inferior button {
+  border: 0px solid;
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+  width: 90%;
+  font-size: larger;
+}
 
+.inferior button:hover {
+  transform: scale(1.01);
+  box-shadow: 3px 3px 3px black;
+}
 
+.preco{
+  font-size: larger;
+  font-weight: bold;
+}
 
-
+.total{
+  display: inline;
+}
+.total span{
+  font-size: x-large;
+  font-weight: bold;
+}
 
 
 
@@ -183,18 +257,20 @@ header button:hover{
 
 
   h1 {
-    font-size: 1.8rem; /* diminui o título */
+    font-size: 1.8rem;
+    /* diminui o título */
   }
 
   #imagem_destaque {
-    height: 150px; /* reduz altura da imagem */
+    height: 150px;
+    /* reduz altura da imagem */
   }
 
-  header{
+  header {
     width: 100%;
   }
 
-  #previa{
+  #previa {
     width: 100%;
   }
 }

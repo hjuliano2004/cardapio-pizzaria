@@ -1,16 +1,19 @@
 let ul = document.getElementById("pizzas");
 import { carrinho, sequence } from "./scr/carrinho.js";
-import { esconde, mostra } from "./scr/utils.js";
-import { bebidas, editar, inicio, sabores } from "./script.js";
+import { atlTipoPizza } from "./scr/sabores.js";
+import { esconde, formatCoins, mostra } from "./scr/utils.js";
+import { atualizarTotais, bebidas, editar, inicio, router, sabores } from "./script.js";
+import { navigate } from "./utils/Router.js";
 let listaPizzas = [];
+export let total_sabor = document.getElementById("total_sabor");
 
 export function rendLista() {
 
-    Pizza("Broto", 4, 1, "30,00");
-    Pizza("Média", 8, 2, "40,00");
-    Pizza("Grande", 12, 3, "50,00");
-    Pizza("Gigante", 16, 4, "60,00");
-    Pizza("Extra Gigante", 20, 4, "70,00");
+    Pizza("Broto", 4, 1, 30);
+    Pizza("Média", 8, 2, 40);
+    Pizza("Grande", 12, 3, 50);
+    Pizza("Gigante", 16, 4, 60);
+    Pizza("Extra Gigante", 20, 4, 70);
 
     for (let i = 0; i < listaPizzas.length; i++) {
         ul.appendChild(listaPizzas[i]);
@@ -39,11 +42,13 @@ function Pizza(tipo, qPedacos, qSabores, preco) {
     li.addEventListener("click", (e) => {
         let novo = objPizza(tipo, qSabores, preco);
         carrinho.pizzas.push(novo);
-        esconde([inicio, bebidas]);
-        mostra([sabores]);
-        editar.pizza = novo.getId();
+        navigate(router, "/#sabores")
+        atualizarTotais();
+        editar.pizza = carrinho.posicaoPizza(novo.getId());
+        atlTipoPizza();
     })
 }
+
 
 function objPizza(tipo, qSabores, valor) {
 
