@@ -10,9 +10,9 @@
 
 <body>
 
-    <main id="inicio">
+    <main id="inicio" class="page">
 
-        <section id="previa">
+        <section id="previa" class="page">
 
             <button id="btn-fecha-prev">
                 <svg id="dupla-esquerda" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -85,9 +85,47 @@
 
         <ul id="pizzas"></ul>
     </main>
+<!--sabores de pizza -------------------------------------------------->
+    <section id="sabores" class="page">
+        <div class="barra_superior">
+            <button class="btn_retorno" id="retorno_sabores">
+                <svg class="retorno" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+                    <path fill-rule="evenodd"
+                        d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+                </svg>
+            </button>
+            <h3 id="tipo_pizza"></h3>
+        </div>
 
-    <section id="sabores">pizza</section>
-    <section id="bebidas">bebidas</section>
+
+        <section id="inferior_sabor" class="inferior">
+            <p id="total_sabor" class="total">total</p> <button id="btn_sabor">PRÓXIMO</button>
+        </section>
+<!--bebidas -------------------------------------------------->
+    </section>
+    <section id="bebidas" class="page">
+                <div class="barra_superior">
+            <button class="btn_retorno" id="retorno_bebidas">
+                <svg class="retorno" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+                    <path fill-rule="evenodd"
+                        d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+                </svg>
+            </button>
+            <h3 id="tipo_bebida"></h3>
+        </div>
+
+
+        <section id="inferior_bebida" class="inferior">
+            <p id="total_bebida" class="total">total</p> <button id="btn_sabor">PRÓXIMO</button>
+        </section>
+    </section>
+
 
     <script type="module" src="script.js"></script>
 </body>
