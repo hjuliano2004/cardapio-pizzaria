@@ -17,6 +17,15 @@ export let carrinho = {
 
     },
 
+    pizzaById:(id)=>{
+        for(let i=0;i<carrinho.pizzas.length;i++){
+            if(carrinho.pizzas[i].getId() === id){
+                return carrinho.pizzas[i];
+            }
+        }
+
+    },
+
     posicaoPizza: (id)=>{
         for(let i=0;i<carrinho.pizzas.length;i++){
             if(carrinho.pizzas[i].getId() === id){
@@ -28,10 +37,12 @@ export let carrinho = {
     delPizza: (id)=>{
 
         for(let i=0;i<carrinho.pizzas.length;i++){
-            if(carrinho.pizzas[i].getId() === id){
+            
+            if(carrinho.pizzas[i].getId() == id){
                 carrinho.pizzas.splice(i, 1);
                 return null;
             }
+
         }
     },
 
@@ -44,4 +55,9 @@ export let carrinho = {
     }
 }
 
-export let sequence = {valor: 0};
+let sequence = {valor: 0};
+
+export function sequencia(){
+    sequence.valor++;
+    return sequence.valor;
+}

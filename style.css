@@ -178,12 +178,14 @@ header button:hover {
 .barra_superior {
   background-color: rgb(255, 217, 0);
   display: flex;
-  /* ativa flexbox */
   align-items: center;
-  /* alinha verticalmente */
   justify-content: space-between;
-  /* distribui: botão à esquerda, h3 centralizado */
   padding: 0 10px;
+  position: fixed;
+  width: 98%;
+
+  transform: translateX(-50%);
+  left: 50%;
 }
 
 .barra_superior h3 {
@@ -204,15 +206,15 @@ header button:hover {
 
 .inferior {
   position: fixed;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+
   box-shadow: -1px -1px 3px;
   width: 90%;
   transform: translateX(-50%);
   left: 50%;
   bottom: 1%;
-
   padding: 1%;
+
+  background-color: rgb(255, 255, 255);
 }
 
 .inferior p {
@@ -233,18 +235,101 @@ header button:hover {
   box-shadow: 3px 3px 3px black;
 }
 
-.preco{
+.preco {
   font-size: larger;
   font-weight: bold;
 }
 
-.total{
+.total {
   display: inline;
 }
-.total span{
+
+.total span {
   font-size: x-large;
   font-weight: bold;
 }
+
+.base {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  flex-direction: row;
+}
+
+.lista li {
+  list-style: none;
+  color: black;
+  border-left: 2px solid rgb(0, 0, 0);
+  padding-right: 5px;
+  padding-left: 1px;
+
+}
+
+
+#sabores_pizza {
+  padding-top: 5%;
+  padding-bottom: 10%;
+}
+
+#sabores_pizza li {
+  list-style: none;
+  border: 1px solid gray;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  vertical-align: middle;
+
+  width: 100%;
+}
+
+#sabores_pizza li div{
+  vertical-align: middle;
+}
+
+.dp {
+  vertical-align: middle;
+  float: right;
+  text-align: right;
+  width: 2in;
+}
+
+.dp button {
+  display: inline;
+  font-size: xx-large;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 5%;
+  border: 0px solid;
+}
+
+.dp p {
+  display: inline;
+  padding: 3%;
+  font-size: x-large;
+}
+
+.dp button:hover {
+  background-color: rgb(209, 209, 209);
+  color: white;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -273,4 +358,9 @@ header button:hover {
   #previa {
     width: 100%;
   }
+
+  #sabores_pizza {
+    padding-bottom: 30%;
+  }
+
 }
