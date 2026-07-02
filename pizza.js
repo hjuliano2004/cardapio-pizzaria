@@ -1,8 +1,9 @@
 let ul = document.getElementById("pizzas");
-import { carrinho, sequencia} from "./scr/carrinho.js";
+import { carrinho, sequencia } from "./scr/carrinho.js";
 import { esconde, formatCoins, mostra } from "./scr/utils.js";
 import { atualizarTipoPizza, atualizarTotais, bebidas, editar, inicio, router, sabores } from "./script.js";
 import { navigate } from "./utils/Router.js";
+import { rendListaSabores } from "./scr/sabores.js";
 let listaPizzas = [];
 
 export function rendLista() {
@@ -44,6 +45,7 @@ function Pizza(tipo, qPedacos, qSabores, preco) {
         atualizarTotais();
         editar.pizza = novo.getId();
         atualizarTipoPizza();
+        rendListaSabores();
     })
 }
 

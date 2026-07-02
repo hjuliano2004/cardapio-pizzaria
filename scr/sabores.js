@@ -12,7 +12,7 @@ let btns_p = document.getElementsByClassName("btn_proximo");
 let ul = document.getElementById("sabores_pizza");
 
 
-function Sabor(nome, preco, ingredientes) {
+function Sabor(nome, preco, ingredientes, num, addf, delf) {
 
     let cel = document.createElement("div");
     let cel2 = document.createElement("div");
@@ -22,10 +22,18 @@ function Sabor(nome, preco, ingredientes) {
     let del = document.createElement("button");
     let dp = document.createElement("p");
 
-    dp.innerText = "0";
+    dp.appendChild(num);
 
     add.innerText = "+";
     del.innerText = "-";
+
+    add.addEventListener("click", () => {
+        addf();
+    })
+
+    del.addEventListener("click", () => {
+        delf();
+    })
 
 
 
@@ -62,13 +70,57 @@ function objSabor(nome, preco, tipo, ingredientes) {
     const precoSabor = preco;
     const ingredientesSabor = ingredientes;
     const tipoSabor = tipo;
+    let valor = 0;//TODO: o valor sempre deve representar a quantidade do sabor da pizza atual
+
+
+
+    try {
+        if (carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length > 0) {     //TODO lembrar de testar diferentes botões pra 
+            valor = carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length;   //TODOrenderizar a pagina sabores
+        }
+
+    }catch(e){
+        console.clear();
+        console.log(e)
+    }
+
+    let num = document.createElement("p");
+    num.innerText = `${valor}`;
+
+    let add = () => {
+
+        if (carrinho.pizzaById(editar.pizza).getSabores().length < carrinho.pizzaById(editar.pizza).getMaximo()) {
+            valor++;
+            num.innerText = `${valor}`;
+            carrinho.pizzaById(editar.pizza).getSabores().push(nomeSabor);//TODO: lembrar de transformar "sabor" em objeto com nome e preço
+        }
+
+
+
+        console.clear();
+        console.log(carrinho.pizzaById(editar.pizza).getSabores());
+    }
+
+    let del = () => {
+        if (valor > 0) {
+            valor--;
+            num.innerText = `${valor}`;
+            let posicao = carrinho.pizzaById(editar.pizza).getSabores().indexOf(nomeSabor);
+            carrinho.pizzaById(editar.pizza).getSabores().splice(posicao, 1);
+        }
+
+        console.clear();
+        console.log(carrinho.pizzaById(editar.pizza).getSabores())//TODO: retirar esses consoles daqui
+    }
+
+
 
     return {
         getNome: () => { return nomeSabor },
         getPreco: () => { return precoSabor },
         getIngredientes: () => { return ingredientesSabor },
         getTipo: () => { return tipoSabor },
-        html: () => { return Sabor(nomeSabor, precoSabor, ingredientesSabor) }
+        html: () => { return Sabor(nomeSabor, precoSabor, ingredientesSabor, num, add, del) }
     }
 }
 
@@ -85,7 +137,11 @@ function listagemSabores() {
 
 }
 
-function rendListaSabores() {
+export function rendListaSabores() {
+
+    let ul = document.getElementById("sabores_pizza");
+
+    ul.innerText = "";
 
     listagemSabores();
 
@@ -101,6 +157,7 @@ export function paginaSabores() {
     retorno.addEventListener("click", () => {
         navigate(router, "/");
         carrinho.delPizza(editar.pizza);
+        ul.innerText = "";
     })
 
     btn_sabor.addEventListener("click", () => {
@@ -109,13 +166,5 @@ export function paginaSabores() {
         } else { alert("Selecione pelo menos um sabor para prosseguir"); }
     })
 
-    window.addEventListener("click", () => {
-        if (carrinho.pizzaById(editar.pizza).getSabores().length == 0) {
-            for (let i = 0; i < btns_p.length; i++) {
-                btns_p[i].style.backgroundColor = "#FF7F7F";
-            }
-        }
-    });
-
-    rendListaSabores();
+    
 }
