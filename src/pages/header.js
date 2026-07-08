@@ -1,10 +1,14 @@
-import { root } from "../../script.js";
+import { root, router } from "../../script.js";
 import { horario } from "../utils/horas.js";
+import { Proximo } from "../utils/proximo.js";
+import { navigate } from "../utils/Router.js";
+import { btn_carrinho } from "./Carrinho.js";
 import { rendLista } from "./pizzas.js";
 import { sectionPrevia } from "./previa.js";
 
 // Criar o header
 const header = document.createElement("header");
+export const comprarMais = maisBtn();
 
 // Imagem de destaque
 const imagemDestaque = document.createElement("img");
@@ -87,8 +91,10 @@ endereco.appendChild(sectionHeader);
 // Adicionar endereço dentro do header
 header.appendChild(endereco);
 
-// Finalmente, anexar o header ao body
-document.body.appendChild(header);
+export const divCarrinhoHeader = document.createElement("div");
+divCarrinhoHeader.id = "divCarrinhoHeader";
+
+header.appendChild(divCarrinhoHeader);
 
 prevPagamentosBtn.addEventListener("click", () => {
     sectionPrevia.style.display = "block";
@@ -98,6 +104,25 @@ export function renderHeader() {
     root.innerText = "";
     root.appendChild(sectionPrevia);
     root.appendChild(header);
+    divCarrinhoHeader.appendChild(btn_carrinho);
+
     horario();
     rendLista();
+}
+
+
+
+function maisBtn(){
+    let btn = document.createElement("button");
+    btn.id = "comprarMais"
+
+    btn.innerText = "Comprar +"
+
+    btn.addEventListener("click", ()=>{
+        navigate(router, "/");
+
+    })
+
+
+    return btn;
 }

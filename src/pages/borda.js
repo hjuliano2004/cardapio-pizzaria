@@ -1,11 +1,12 @@
-import { editar, root, router } from "../../script.js";
+import { atualizarTipoPizza, editar, root, router } from "../../script.js";
 import { carrinho } from "../models/carrinho.js";
 import { Proximo } from "../utils/proximo.js";
 import { btn_retorno } from "../utils/Retorno.js";
 import { navigate } from "../utils/Router.js";
 import { formatCoins } from "../utils/utils.js";
+import { btn_carrinho } from "./Carrinho.js";
 import { atualizarTotal, divProximo, nLi, sectionInferior } from "./inferior.js";
-import { barraSuperior, btnRetorno } from "./superior.js";
+import { barraSuperior, btnRetorno, div_carrinho } from "./superior.js";
 
 let retorno = btn_retorno("/#sabores");
 let proximo = Proximo();
@@ -31,25 +32,27 @@ function bordaHtml(value, preco, escolhido) {
     p.innerText = `R$${formatCoins(preco)}`;
     p.classList.add("preco");
 
-        input.checked = escolhido;
-    
+    input.checked = escolhido;
+
 
     div.appendChild(label);
     div.appendChild(p)
     li.appendChild(div);
     li.appendChild(input);
 
-    li.addEventListener("click", ()=>{{
+    li.addEventListener("click", () => {
+        {
 
-        input.checked = !input.checked;
-        carrinho.pizzaById(editar.pizza).setBorda({sabor: value, preco: preco});
+            input.checked = !input.checked;
+            carrinho.pizzaById(editar.pizza).setBorda({ sabor: value, preco: preco });
 
-        if(!input.checked){
-            carrinho.pizzaById(editar.pizza).setBorda({sabor: null, preco: 0})
+            if (!input.checked) {
+                carrinho.pizzaById(editar.pizza).setBorda({ sabor: null, preco: 0 })
+            }
+
+            atualizarTotal();
         }
-
-        atualizarTotal();
-    }})
+    })
 
     return li;
 }
@@ -118,17 +121,19 @@ export function renderBordas() {
 
     divProximo.innerText = "";
     divProximo.appendChild(proximo);
+    div_carrinho.innerText = "";
+    div_carrinho.appendChild(btn_carrinho);
     lista();
-
+    atualizarTipoPizza();
     atualizarTotal();
     nLi();
 }
 
-proximo.addEventListener("click", ()=>{
+proximo.addEventListener("click", () => {
 
-        navigate(router, "/#carrinho");
-        if(!carrinho.pizzaById(editar.pizza).getBorda()){
-            carrinho.pizzaById(editar.pizza).setBorda({sabor: "sem borda", preco: 0})
-        }
+    navigate(router, "/#carrinho");
+    if (!carrinho.pizzaById(editar.pizza).getBorda()) {
+        carrinho.pizzaById(editar.pizza).setBorda({ sabor: "sem borda", preco: 0 })
+    }
 
 })
