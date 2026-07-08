@@ -1,6 +1,6 @@
 import Router from "./Router.js";
 
-export function rotas() {
+
 
 
     // Define quais elementos ficam visíveis em cada rota
@@ -34,4 +34,3 @@ export function rotas() {
     });
 
 
-}

@@ -1,86 +1,34 @@
-import { rendLista } from "./pizza.js";
-import { carrinho } from "./scr/carrinho.js";
-import { horario } from "./scr/horas.js";
-import { previa } from "./scr/prevPagamentos.js";
-import { paginaSabores } from "./scr/sabores.js";
-import { formatCoins } from "./scr/utils.js";
-import { Router } from "./utils/Router.js";
+import { carrinho } from "./src/models/carrinho.js";
+import { renderBordas } from "./src/pages/borda.js";
+import { rendCarrinho } from "./src/pages/Carrinho.js";
+import { renderHeader } from "./src/pages/header.js";
+import { renderListaSabores } from "./src/pages/sabores.js";
+import { tipoPizza } from "./src/pages/superior.js";
+import { Router } from "./src/utils/Router.js";
 
-
-
-export let inicio = document.getElementById("inicio");
-export let bebidas = document.getElementById("bebidas");
-export let sabores = document.getElementById("sabores");
-export let totais = document.getElementsByClassName("total");
-export let tipo_pizza = document.getElementsByClassName("tipo_pizza");
-
-let listas = document.getElementsByClassName("lista");
-
+export let root = document.getElementById("root");
 export let editar = { pizza: 0 };
-export let txt = "";
-
-export function atualizarTotais(item = "") {
-
-    txt = txt + item;
-
-
-    let total = carrinho.total();
-
-    for (let i = 0; i < totais.length; i++) {
-        totais[i].innerHTML = `total <span>${formatCoins(total)}</span>`;
-    }
-
-    for (let i = 0; i < listas.length; i++) {
-        listas[i].innerHTML = txt;
-    }
-}
-
-export function atualizarTipoPizza() {
-    for (let i = 0; i < tipo_pizza.length; i++) {
-        tipo_pizza[i].innerText = carrinho.pizzaById(editar.pizza).getTipo();
-    }
-}
-
-
 
 // Define quais elementos ficam visíveis em cada rota
 const routes = {
-    "/": () => showElements(["inicio"]),
-    "/#previa": () => showElements(["inicio", "previa"]),
-    "/#sabores": () => showElements(["sabores"]),
-    "/#bordas": () => showElements(["bordas"]),
-    "/#bebidas": () => showElements(["bebidas"]),
-
-    "/404": () => showElements(["notfound"]),
-    "/#404": () => showElements(["notfound"])
+    "/": () => showElements([renderHeader]),
+    "/#sabores": () => showElements([renderListaSabores]),
+    "/#carrinho": () => showElements([rendCarrinho]),
+    "/#bordas": () => showElements([renderBordas]),
 };
 
 export const router = new Router(routes);
 
 // Função que controla visibilidade de múltiplos elementos
 function showElements(ids) {
-    document.querySelectorAll(".page").forEach(el => {
-        el.style.display = "none";
-    });
+
     for (let i = 0; i < ids.length; i++) {
-        document.getElementById(ids[i]).style.display = "block";
+        ids[i]();
     }
 }
 
-// Intercepta links
-document.querySelectorAll("a[data-link]").forEach(link => {
-    link.addEventListener("click", e => {
-        e.preventDefault();
-        router.navigate(link.getAttribute("href"));
-    });
-});
+export function atualizarTipoPizza() {
 
+    tipoPizza.innerText = carrinho.pizzaById(editar.pizza).getTipo();
 
-
-horario();
-
-previa();
-
-rendLista();
-
-paginaSabores();
+}

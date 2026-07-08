@@ -1,4 +1,4 @@
-let funcionamento = document.getElementById("funcionamento");
+import { h4Funcionamento } from "../pages/header.js";
 
 let aberto = true;
 
@@ -28,20 +28,20 @@ export function horario(){
     if(now.dia === 1){
         aberto = false;
 
-        funcionamento.innerText = "Fechado, abre amanhã";
-        funcionamento.style.color = "red";
+        h4Funcionamento.innerText = "Fechado, abre amanhã";
+        h4Funcionamento.style.color = "red";
 
         return
     }
 
     if(aberto){
 
-        funcionamento.innerText = "Aberto"
-        funcionamento.style.color = "green";
+        h4Funcionamento.innerText = "Aberto"
+        h4Funcionamento.style.color = "green";
         
     }else{
-        funcionamento.innerText = "Fechado";
-        funcionamento.style.color = "red";
+        h4Funcionamento.innerText = "Fechado";
+        h4Funcionamento.style.color = "red";
     }
 
 
