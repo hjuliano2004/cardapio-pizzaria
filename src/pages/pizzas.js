@@ -1,12 +1,19 @@
-let ul = document.getElementById("pizzas");
-import { carrinho, sequencia } from "./scr/carrinho.js";
-import { esconde, formatCoins, mostra } from "./scr/utils.js";
-import { atualizarTipoPizza, atualizarTotais, bebidas, editar, inicio, router, sabores } from "./script.js";
-import { navigate } from "./utils/Router.js";
-import { rendListaSabores } from "./scr/sabores.js";
+import { atualizarTipoPizza, editar, root, router } from "../../script.js";
+import { carrinho, sequencia } from "../models/carrinho.js";
+import { navigate } from "../utils/Router.js";
+import { formatCoins } from "../utils/utils.js";
+import { renderListaSabores} from "./sabores.js";
+
 let listaPizzas = [];
 
+export let ul = document.createElement("ul");
+ul.id = "pizzas";
+
 export function rendLista() {
+
+    listaPizzas = [];
+    ul.innerHTML = "";
+    root.appendChild(ul);
 
     Pizza("Broto", 4, 1, 30);
     Pizza("Média", 8, 2, 40);
@@ -36,16 +43,18 @@ function Pizza(tipo, qPedacos, qSabores, preco) {
     li.appendChild(p);
     li.appendChild(valor);
 
-    listaPizzas.push(li);
+    listaPizzas.push(li); 
 
     li.addEventListener("click", (e) => {
         let novo = objPizza(tipo, qSabores, preco);
         carrinho.pizzas.push(novo);
         navigate(router, "/#sabores");
-        atualizarTotais();
+        //atualizarTotais();
         editar.pizza = novo.getId();
         atualizarTipoPizza();
-        rendListaSabores();
+        
+
+        //renderListaSabores();
     })
 }
 
@@ -56,7 +65,7 @@ function objPizza(tipo, qSabores, valor) {
     const quantidade = qSabores;//quantidade de sabores possivel
     let preco = valor;//preço base da pizza
     let sabores = [];
-    let borda = "";
+    let borda = null;
     let precoBorda = 0;
     const id = sequencia();
 
@@ -67,6 +76,8 @@ function objPizza(tipo, qSabores, valor) {
         getId: () => { return id },
         getSabores: () => { return sabores },
         limpaSabores: () => { sabores = [] },
+        getBorda:     ()=>{ return borda},
+        getPrecoBorda: ()=>{ return precoBorda},
         setBorda: (nborda) => {
             borda = nborda.sabor;
             precoBorda = nborda.preco;

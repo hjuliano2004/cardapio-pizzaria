@@ -24,6 +24,8 @@ export let carrinho = {
             }
         }
 
+        return null;
+
     },
 
     posicaoPizza: (id)=>{
@@ -44,6 +46,7 @@ export let carrinho = {
             }
 
         }
+
     },
 
     delBebida: (id)=>{

@@ -94,7 +94,8 @@ header button:hover {
   display: none;
   width: 50%;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  left: 1%
+  left: 1%;
+  z-index: 1000;
 }
 
 #previa li {
@@ -125,6 +126,12 @@ header button:hover {
   background-color: #b22222;
   border: 3px solid black;
   border-radius: 3px;
+}
+
+#previa button:hover {
+  background-color: rgb(209, 209, 209);
+  color: white;
+  cursor: pointer;
 }
 
 #dupla-esquerda {
@@ -170,9 +177,9 @@ header button:hover {
 }
 
 .retorno {
-
   width: 0.3in;
   height: 0.3in;
+  color: #000;
 }
 
 .barra_superior {
@@ -254,10 +261,14 @@ header button:hover {
   grid-template-columns: 1fr 1fr;
 }
 
+.base button {
+  height: 100%;
+}
+
 .lista {
   display: flex;
-  flex-wrap: wrap;
   gap: 1px;
+  flex-wrap: wrap;
   flex-direction: row;
 }
 
@@ -277,6 +288,7 @@ header button:hover {
 }
 
 #sabores_pizza li {
+  display: flex;
   list-style: none;
   border: 1px solid gray;
   border-top: 0px;
@@ -287,14 +299,14 @@ header button:hover {
   width: 100%;
 }
 
-#sabores_pizza li div{
+#sabores_pizza li div {
   vertical-align: middle;
 }
 
 .dp {
-  vertical-align: middle;
-  text-align: right;
   width: 2in;
+  margin-left: auto;
+
 }
 
 .dp button {
@@ -318,18 +330,77 @@ header button:hover {
   cursor: pointer;
 }
 
+#lista_bordas {
+  display: grid;
+  gap: 1%;
+  padding-top: 5%;
+  padding-bottom: 25%;
+}
 
 
+#lista_bordas li {
+  display: flex;
+  list-style: none;
+  box-shadow: 1px 1px 3px black;
+  border-radius: 3px;
+  padding: 1%;
+  padding-bottom: 0%;
+}
+
+#lista_bordas li input {
+  margin-left: auto;
+
+}
+
+#lista_bordas li:hover {
+  transform: scale(1.01);
+}
+
+/*carrinho tem 2 tipos de lista, pizzas e bebidas, .carrinho serve pras duas listas*/
+
+.carrinho {
+  list-style: none;
+  border-radius: 3px;
+  gap: 1%;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.carrinho button{
+  font-size: 0.3in;
+  background-color: transparent;
+  border: 0px solid transparent;
+}
+
+.carrinho ul {
+  list-style: none;
+}
+
+.sabores_carrinho {
+  box-shadow: 1px 1px 3px black;
+  border-radius: 5px;
+  padding: 1%;
+  display: flex;
+}
 
 
+#pizza_carrinho .borda{
+  padding-top: 1%;
+  padding-bottom: 1%;
 
+}
 
+#lixo{
+  width: 0.3in;
+  height: 0.3in;
+  color: red;
+}
 
-
-
-
-
-
+.dp_carrinho{
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
 
 
@@ -337,7 +408,7 @@ header button:hover {
 
 
 /* Layout para telas menores (celular) */
-@media (max-width: 4in) {
+@media (max-width: 10in) {
 
 
   h1 {
@@ -360,6 +431,13 @@ header button:hover {
 
   #sabores_pizza {
     padding-bottom: 30%;
+  }
+
+
+  #lista_bordas {
+
+    padding-top: 15%;
+    padding-bottom: 40%;
   }
 
 }

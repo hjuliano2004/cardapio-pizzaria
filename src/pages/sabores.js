@@ -1,15 +1,17 @@
 import { navigate } from "../utils/Router.js";
-import { editar, router } from "../script.js"
-import { carrinho } from "./carrinho.js";
-import { formatCoins } from "./utils.js";
+import { editar, root, router } from "../../script.js"
+import { carrinho } from "../models/carrinho.js";
+import { formatCoins } from "../utils/utils.js";
+import { barraSuperior, btnRetorno } from "./superior.js";
+import { btn_retorno } from "../utils/Retorno.js";
+import { atualizarTotal, divProximo, nLi, sectionInferior } from "./inferior.js";
+import { Proximo } from "../utils/proximo.js";
 
-let listaSabores = [];
 
-let retorno = document.getElementById("retorno_sabores");
 
-export let btn_sabor = document.getElementById("btn_sabor");
-let btns_p = document.getElementsByClassName("btn_proximo");
-let ul = document.getElementById("sabores_pizza");
+
+let retorno1 = btn_retorno("/");
+let proximo1 = Proximo();
 
 
 function Sabor(nome, preco, ingredientes, num, addf, delf) {
@@ -79,9 +81,8 @@ function objSabor(nome, preco, tipo, ingredientes) {
             valor = carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length;   //TODOrenderizar a pagina sabores
         }
 
-    }catch(e){
-        console.clear();
-        console.log(e)
+    } catch (e) {
+        //TODO ainda não descobri outro jeito de contornar a excessão sem usar try catch pra evitar quebrar a página
     }
 
     let num = document.createElement("p");
@@ -93,12 +94,9 @@ function objSabor(nome, preco, tipo, ingredientes) {
             valor++;
             num.innerText = `${valor}`;
             carrinho.pizzaById(editar.pizza).getSabores().push(nomeSabor);//TODO: lembrar de transformar "sabor" em objeto com nome e preço
+
+            nLi();
         }
-
-
-
-        console.clear();
-        console.log(carrinho.pizzaById(editar.pizza).getSabores());
     }
 
     let del = () => {
@@ -107,10 +105,9 @@ function objSabor(nome, preco, tipo, ingredientes) {
             num.innerText = `${valor}`;
             let posicao = carrinho.pizzaById(editar.pizza).getSabores().indexOf(nomeSabor);
             carrinho.pizzaById(editar.pizza).getSabores().splice(posicao, 1);
+            nLi();
         }
 
-        console.clear();
-        console.log(carrinho.pizzaById(editar.pizza).getSabores())//TODO: retirar esses consoles daqui
     }
 
 
@@ -124,7 +121,7 @@ function objSabor(nome, preco, tipo, ingredientes) {
     }
 }
 
-function listagemSabores() {
+function listagemSabores(listaSabores) {
 
     listaSabores.push(objSabor("Calabresa", 0, "salgado", "Molho de tomate, mussarela, calabresa e cebola"));
     listaSabores.push(objSabor("Frango com Catupiry", 0, "salgado", "Molho de tomate, mussarela, frango desfiado e catupiry"));
@@ -137,34 +134,41 @@ function listagemSabores() {
 
 }
 
-export function rendListaSabores() {
+export function renderListaSabores() {
 
-    let ul = document.getElementById("sabores_pizza");
+    if(carrinho.pizzas.length == 0){navigate(router, "/");}
 
-    ul.innerText = "";
+    let sabores_pizza = document.createElement("ul");
+    sabores_pizza.id = "sabores_pizza";
+    let listaSabores = [];
 
-    listagemSabores();
+    listagemSabores(listaSabores);
 
     for (let i = 0; i < listaSabores.length; i++) {
-        ul.appendChild(listaSabores[i].html());
+        sabores_pizza.appendChild(listaSabores[i].html());
     }
+
+    root.innerText = "";
+    root.appendChild(barraSuperior);
+    root.appendChild(sabores_pizza);
+    root.appendChild(sectionInferior);
+    btnRetorno.innerText = "";
+    btnRetorno.appendChild(retorno1);
+
+    divProximo.innerText = "";
+    divProximo.appendChild(proximo1);
+    atualizarTotal();
+    nLi();
 }
 
+retorno1.addEventListener("click", ()=>{
+    carrinho.delPizza(editar.pizza);//TODO quando o local storage passar a guardar o estado do carrinho, esse evewnto precisa atualizar lá também
+})
 
-
-export function paginaSabores() {
-
-    retorno.addEventListener("click", () => {
-        navigate(router, "/");
-        carrinho.delPizza(editar.pizza);
-        ul.innerText = "";
-    })
-
-    btn_sabor.addEventListener("click", () => {
-        if (carrinho.pizzaById(editar.pizza).getSabores().length > 0) {
-            navigate(router, "/#bordas");
-        } else { alert("Selecione pelo menos um sabor para prosseguir"); }
-    })
-
-    
-}
+proximo1.addEventListener("click", ()=>{
+    if(carrinho.pizzaById(editar.pizza).getSabores().length > 0){
+        navigate(router, "/#bordas");
+    }else{
+        alert("escolha ao menos 1 sabor")
+    }
+})
