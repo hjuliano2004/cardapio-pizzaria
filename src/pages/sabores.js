@@ -1,11 +1,12 @@
 import { navigate } from "../utils/Router.js";
-import { editar, root, router } from "../../script.js"
+import { atualizarTipoPizza, editar, root, router } from "../../script.js"
 import { carrinho } from "../models/carrinho.js";
 import { formatCoins } from "../utils/utils.js";
-import { barraSuperior, btnRetorno } from "./superior.js";
+import { barraSuperior, btnRetorno, div_carrinho } from "./superior.js";
 import { btn_retorno } from "../utils/Retorno.js";
 import { atualizarTotal, divProximo, nLi, sectionInferior } from "./inferior.js";
 import { Proximo } from "../utils/proximo.js";
+import { btn_carrinho } from "./Carrinho.js";
 
 
 
@@ -40,18 +41,18 @@ function Sabor(nome, preco, ingredientes, num, addf, delf) {
 
 
     let p = document.createElement("h3");
-    let valor = document.createElement("p");
+    //let valor = document.createElement("p");
     let descricao = document.createElement("p");
 
     p.innerText = nome;
-    valor.innerText = `R$ ${formatCoins(preco)}`;
-    valor.classList.add("preco");
+    //valor.innerText = `R$ ${formatCoins(preco)}`;
+    //valor.classList.add("preco");
     descricao.innerText = ingredientes;
     cel2.classList.add("dp");
 
     cel.appendChild(p);
     cel.appendChild(descricao);
-    cel.appendChild(valor);
+    //cel.appendChild(valor);
 
     cel2.appendChild(del);
     cel2.appendChild(dp);
@@ -136,7 +137,7 @@ function listagemSabores(listaSabores) {
 
 export function renderListaSabores() {
 
-    if(carrinho.pizzas.length == 0){navigate(router, "/");}
+    if (carrinho.pizzas.length == 0) { navigate(router, "/"); }
 
     let sabores_pizza = document.createElement("ul");
     sabores_pizza.id = "sabores_pizza";
@@ -154,21 +155,23 @@ export function renderListaSabores() {
     root.appendChild(sectionInferior);
     btnRetorno.innerText = "";
     btnRetorno.appendChild(retorno1);
-
     divProximo.innerText = "";
     divProximo.appendChild(proximo1);
+    div_carrinho.innerText = "";
+    div_carrinho.appendChild(btn_carrinho);
+    atualizarTipoPizza();
     atualizarTotal();
     nLi();
 }
 
-retorno1.addEventListener("click", ()=>{
+retorno1.addEventListener("click", () => {
     carrinho.delPizza(editar.pizza);//TODO quando o local storage passar a guardar o estado do carrinho, esse evewnto precisa atualizar lá também
 })
 
-proximo1.addEventListener("click", ()=>{
-    if(carrinho.pizzaById(editar.pizza).getSabores().length > 0){
+proximo1.addEventListener("click", () => {
+    if (carrinho.pizzaById(editar.pizza).getSabores().length > 0) {
         navigate(router, "/#bordas");
-    }else{
+    } else {
         alert("escolha ao menos 1 sabor")
     }
 })

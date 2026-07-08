@@ -1,12 +1,21 @@
-import { root, router } from "../../script.js";
+import { editar, root, router } from "../../script.js";
 import { carrinho } from "../models/carrinho.js";
+import { Proximo } from "../utils/proximo.js";
 import { navigate } from "../utils/Router.js";
 import { formatCoins } from "../utils/utils.js";
+import { comprarMais } from "./header.js";
 import { atualizarTotal, divProximo, listaInferior, sectionInferior } from "./inferior.js";
+import { objPizza } from "./pizzas.js";
+import { barraSuperior, btnRetorno, div_carrinho, tipoPizza } from "./superior.js";
 
 let ul = document.createElement("ul");
+export const btn_carrinho = BtnCarrinho();
 ul.id = "pizza_carrinho";
-ul.classList.add("carrinho")
+ul.classList.add("carrinho");
+
+const pagamento = Proximo();
+pagamento.innerText = "Pagamento";
+
 
 function posicao(pizza) {
 
@@ -33,6 +42,8 @@ function posicao(pizza) {
 
     div2.appendChild(clonagem(pizza));
     div2.appendChild(excluir(pizza));
+    div2.appendChild(edit(pizza));
+
     div2.classList.add("dp_carrinho");
     div.style.width = "70%";
 
@@ -47,17 +58,56 @@ function posicao(pizza) {
     li.appendChild(div);
     li.appendChild(div2);
 
-    ul.appendChild(li)
+    ul.appendChild(li);
 }
 
 function clonagem(pizza) {
     let btn = document.createElement("button");
     btn.innerText = "+";
 
-    btn.addEventListener("click", () => {
-        console.log(carrinho.pizzas)
 
+
+    btn.addEventListener("click", () => {
+
+        let sabores = [];
+
+        for (let i = 0; i < pizza.getSabores().length; i++) {
+            sabores.push(pizza.getSabores()[i]);
+        }
+
+        let nova = objPizza(pizza.getTipo(), pizza.getMaximo(), pizza.getPrecoBase());
+        nova.setSabores(sabores);
+        nova.setBorda({ sabor: pizza.getBorda(), preco: pizza.getPrecoBorda() });
+        carrinho.pizzas.push(nova);
+        visualizacao();
+        atualizarTotal();
     })
+
+    return btn;
+}
+
+function edit(pizza) {
+
+    let btn = document.createElement("button");
+    btn.classList.add("editar");
+
+    // Insere o SVG dentro do botão
+    btn.innerHTML = `
+    <svg class="retorno" xmlns="http://www.w3.org/2000/svg"
+         fill="currentColor" class="bi bi-arrow-counterclockwise"
+         viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+        d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+      <path
+        d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+    </svg>
+  `;
+
+    btn.addEventListener("click", () => {
+        editar.pizza = pizza.getId();
+        navigate(router, "/#sabores");
+    })
+
 
     return btn;
 }
@@ -130,12 +180,49 @@ function visualizacao() {
 
 export function rendCarrinho() {
 
-    if (carrinho.pizzas.length == 0) { navigate(router, "/") }
+    revisa();
 
     root.innerText = "";
+    root.appendChild(barraSuperior);
     root.appendChild(ul);
     root.appendChild(sectionInferior);
+    tipoPizza.innerText = "";
+    btnRetorno.innerText = "";
     listaInferior.innerText = "";
-    visualizacao();
     divProximo.innerText = "";
+    divProximo.appendChild(pagamento);
+    div_carrinho.innerText = "";
+    div_carrinho.appendChild(comprarMais);
+    visualizacao();
+    atualizarTotal();
 }
+
+function revisa() {
+    for (let i = 0; i < carrinho.pizzas.length; i++) {
+        if (carrinho.pizzas[i].getSabores().length == 0 || !carrinho.pizzas[i].getBorda()) {
+            carrinho.delPizza(carrinho.pizzas[i].getId())
+        }
+    }
+}
+
+
+
+function BtnCarrinho() {
+    let btn = document.createElement("button");
+
+    btn.innerHTML = `
+        <svg class="retorno" xmlns="http://www.w3.org/2000/svg"
+         fill="currentColor" class="bi bi-cart"
+         viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+    </svg>
+    `
+
+    btn.addEventListener("click", () => {
+        navigate(router, "/#carrinho");
+    })
+
+    return btn;
+}
+
