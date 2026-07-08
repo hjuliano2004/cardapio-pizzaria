@@ -9,6 +9,10 @@ h1 {
   margin: 10px 0;
 }
 
+svg, button{
+  cursor: pointer;
+}
+
 /* Imagem destaque */
 #imagem_destaque {
   width: 100%;
@@ -42,7 +46,7 @@ header {
 }
 
 #comprarMais:hover{
-  transform: scale(1.01);
+  transform: scale(1.03);
   box-shadow: 1px 2px 3px black;
 }
 
@@ -174,8 +178,8 @@ header button:hover {
 }
 
 #pizzas {
-  width: 90%;
   text-align: center;
+  padding: 0;
 }
 
 
@@ -240,19 +244,18 @@ header button:hover {
 
 .inferior {
   position: fixed;
-
   box-shadow: -1px -1px 3px;
-  width: 90%;
+  width: 98%;
   transform: translateX(-50%);
   left: 50%;
   bottom: 1%;
   padding: 1%;
-
   background-color: rgb(255, 255, 255);
 }
 
 .inferior p {
   text-align: center;
+
 }
 
 .inferior button {
@@ -297,6 +300,7 @@ header button:hover {
   gap: 1px;
   flex-wrap: wrap;
   flex-direction: row;
+  padding: 0;
 }
 
 .lista li {
@@ -312,6 +316,8 @@ header button:hover {
 #sabores_pizza {
   padding-top: 5%;
   padding-bottom: 10%;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 #sabores_pizza li {
@@ -333,6 +339,7 @@ header button:hover {
 .dp {
   width: 2in;
   margin-left: auto;
+  text-align: right;
 
 }
 
@@ -362,6 +369,7 @@ header button:hover {
   gap: 1%;
   padding-top: 5%;
   padding-bottom: 25%;
+  padding-left: 0;
 }
 
 
@@ -391,6 +399,7 @@ header button:hover {
   gap: 1%;
   flex-wrap: wrap;
   flex-direction: column;
+  padding-left: 0;
 }
 
 .carrinho button{
@@ -408,6 +417,7 @@ header button:hover {
   border-radius: 5px;
   padding: 1%;
   display: flex;
+  margin-bottom: 1%;
 }
 
 #pizza_carrinho{
@@ -461,14 +471,14 @@ header button:hover {
   }
 
   #sabores_pizza {
-    padding-bottom: 30%;
+    padding-top: 20%;
+    padding-bottom: 40%;
   }
 
 
   #lista_bordas {
-
-    padding-top: 15%;
-    padding-bottom: 40%;
+    padding-top: 18%;
+    padding-bottom: 45%;
   }
 
 }

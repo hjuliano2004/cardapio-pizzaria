@@ -102,6 +102,7 @@ prevPagamentosBtn.addEventListener("click", () => {
 
 export function renderHeader() {
     root.innerText = "";
+    sectionPrevia.style.display = "none";
     root.appendChild(sectionPrevia);
     root.appendChild(header);
     divCarrinhoHeader.appendChild(btn_carrinho);
