@@ -450,6 +450,7 @@ header button:hover {
 
 /* Layout para telas menores (celular) */
 @media (max-width: 10in) {
+  /*TODO a lista do carrinho precisa de um padding bottom grande pra barra inferior não cobrir os pedidos*/
 
 
   h1 {
@@ -480,5 +481,6 @@ header button:hover {
     padding-top: 18%;
     padding-bottom: 45%;
   }
+
 
 }

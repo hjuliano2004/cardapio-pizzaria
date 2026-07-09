@@ -1,13 +1,13 @@
-import { carrinho } from "./src/models/carrinho.js";
+import { carrinho, delState, sequencia } from "./src/models/carrinho.js";
 import { renderBordas } from "./src/pages/borda.js";
 import { rendCarrinho } from "./src/pages/Carrinho.js";
 import { renderHeader } from "./src/pages/header.js";
 import { renderListaSabores } from "./src/pages/sabores.js";
 import { tipoPizza } from "./src/pages/superior.js";
-import { Router } from "./src/utils/Router.js";
+import { navigate, Router } from "./src/utils/Router.js";
 
 export let root = document.getElementById("root");
-export let editar = { pizza: 0 };
+export let editar = { pizza: localStorage.getItem("editar.pizza") };
 
 // Define quais elementos ficam visíveis em cada rota
 const routes = {
@@ -29,6 +29,13 @@ function showElements(ids) {
 
 export function atualizarTipoPizza() {
 
-    tipoPizza.innerText = carrinho.pizzaById(editar.pizza).getTipo();
+    try {
+        tipoPizza.innerText = carrinho.pizzaById(editar.pizza).getTipo();
+    }catch(e){
+        navigate(router, "/")
+    }
+
 
 }
+
+//delState()

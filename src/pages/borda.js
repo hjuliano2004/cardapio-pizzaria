@@ -1,5 +1,5 @@
 import { atualizarTipoPizza, editar, root, router } from "../../script.js";
-import { carrinho } from "../models/carrinho.js";
+import { carrinho, saveState } from "../models/carrinho.js";
 import { Proximo } from "../utils/proximo.js";
 import { btn_retorno } from "../utils/Retorno.js";
 import { navigate } from "../utils/Router.js";
@@ -64,7 +64,13 @@ function borda(sabor, tipo, preco) {
 
     let escolhido = false;
 
-    if (carrinho.pizzaById(editar.pizza).getBorda() === gosto) { escolhido = true }
+
+
+    try {
+        if (carrinho.pizzaById(editar.pizza).getBorda() === gosto) { escolhido = true }
+    } catch (error) {
+        navigate(router, "/")
+    }
 
     return {
         getPreco: () => { return valor },
@@ -132,8 +138,9 @@ export function renderBordas() {
 proximo.addEventListener("click", () => {
 
     navigate(router, "/#carrinho");
+    saveState();
     if (!carrinho.pizzaById(editar.pizza).getBorda()) {
-        carrinho.pizzaById(editar.pizza).setBorda({ sabor: "sem borda", preco: 0 })
+        carrinho.pizzaById(editar.pizza).setBorda({ sabor: "sem borda", preco: 0 });
     }
 
 })
