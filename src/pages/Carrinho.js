@@ -1,5 +1,5 @@
 import { editar, root, router } from "../../script.js";
-import { carrinho } from "../models/carrinho.js";
+import { carrinho, saveState } from "../models/carrinho.js";
 import { Proximo } from "../utils/proximo.js";
 import { navigate } from "../utils/Router.js";
 import { formatCoins } from "../utils/utils.js";
@@ -81,6 +81,7 @@ function clonagem(pizza) {
         carrinho.pizzas.push(nova);
         visualizacao();
         atualizarTotal();
+        saveState();
     })
 
     return btn;
@@ -142,6 +143,7 @@ function excluir(pizza) {
         carrinho.delPizza(pizza.getId());
         visualizacao();
         atualizarTotal();
+        saveState();
     })
 
     return btn;
@@ -195,6 +197,7 @@ export function rendCarrinho() {
     div_carrinho.appendChild(comprarMais);
     visualizacao();
     atualizarTotal();
+    saveState();
 }
 
 function revisa() {

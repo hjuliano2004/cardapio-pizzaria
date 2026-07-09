@@ -67,14 +67,15 @@ export function objPizza(tipo, qSabores, valor) {
     let sabores = [];
     let borda = null;
     let precoBorda = 0;
-    const id = sequencia();
+    let id = sequencia();
 
     return {
         getTipo: () => { return type },
         getMaximo: () => { return quantidade },
         getPreco: () => { return preco + precoBorda },
-        getPrecoBase: () => { return preco},
+        getPrecoBase: () => { return preco },
         getId: () => { return id },
+        setId: (nId) => { return id = nId},
         getSabores: () => { return sabores },
         setSabores: (nLista) => { return sabores = nLista },
         limpaSabores: () => { sabores = [] },
@@ -84,15 +85,18 @@ export function objPizza(tipo, qSabores, valor) {
             borda = nborda.sabor;
             precoBorda = nborda.preco;
         },
-        getJson: () => {
+        getAnotacao: () => {
             let json = {
+                id: id,
                 tipo: type,
-                preço: `R$${preco}`,
-                borda: `${borda}, $${precoBorda}`,
-                sabores: sabores
+                preco: preco,
+                borda: borda,
+                precoBorda: precoBorda,
+                sabores: sabores,
+                qSabores: quantidade
             }
 
-            return JSON.stringify(json);
+            return json;
         }
 
     }

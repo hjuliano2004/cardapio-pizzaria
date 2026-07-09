@@ -1,6 +1,6 @@
 import { navigate } from "../utils/Router.js";
 import { atualizarTipoPizza, editar, root, router } from "../../script.js"
-import { carrinho } from "../models/carrinho.js";
+import { carrinho, saveState } from "../models/carrinho.js";
 import { formatCoins } from "../utils/utils.js";
 import { barraSuperior, btnRetorno, div_carrinho } from "./superior.js";
 import { btn_retorno } from "../utils/Retorno.js";
@@ -162,6 +162,7 @@ export function renderListaSabores() {
     atualizarTipoPizza();
     atualizarTotal();
     nLi();
+    saveState();
 }
 
 retorno1.addEventListener("click", () => {
