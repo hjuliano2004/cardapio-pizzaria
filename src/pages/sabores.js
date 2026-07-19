@@ -166,7 +166,12 @@ export function renderListaSabores() {
 }
 
 retorno1.addEventListener("click", () => {
-    carrinho.delPizza(editar.pizza);//TODO quando o local storage passar a guardar o estado do carrinho, esse evewnto precisa atualizar lá também
+    
+
+    if(!carrinho.pizzaById(editar.pizza).getIncluido()){
+        carrinho.delPizza(editar.pizza);
+        saveState();
+    }
 })
 
 proximo1.addEventListener("click", () => {

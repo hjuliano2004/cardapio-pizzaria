@@ -138,9 +138,13 @@ export function renderBordas() {
 proximo.addEventListener("click", () => {
 
     navigate(router, "/#carrinho");
-    saveState();
+
+    carrinho.pizzaById(editar.pizza).setIncluido(true);
+
     if (!carrinho.pizzaById(editar.pizza).getBorda()) {
         carrinho.pizzaById(editar.pizza).setBorda({ sabor: "sem borda", preco: 0 });
     }
+
+    saveState();
 
 })

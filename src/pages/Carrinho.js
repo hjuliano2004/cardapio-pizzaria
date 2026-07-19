@@ -8,10 +8,13 @@ import { atualizarTotal, divProximo, listaInferior, sectionInferior } from "./in
 import { objPizza } from "./pizzas.js";
 import { barraSuperior, btnRetorno, div_carrinho, tipoPizza } from "./superior.js";
 
+let section = document.createElement("section");
 let ul = document.createElement("ul");
 export const btn_carrinho = BtnCarrinho();
 ul.id = "pizza_carrinho";
 ul.classList.add("carrinho");
+section.appendChild(ul);
+section.classList.add("carrinho")
 
 const pagamento = Proximo();
 pagamento.innerText = "Pagamento";
@@ -186,7 +189,7 @@ export function rendCarrinho() {
 
     root.innerText = "";
     root.appendChild(barraSuperior);
-    root.appendChild(ul);
+    root.appendChild(section);
     root.appendChild(sectionInferior);
     tipoPizza.innerText = "";
     btnRetorno.innerText = "";
@@ -228,4 +231,3 @@ function BtnCarrinho() {
 
     return btn;
 }
-
