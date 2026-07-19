@@ -446,6 +446,11 @@ header button:hover {
   grid-template-columns: 1fr;
 }
 
+#formulario form{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
 
 
 
