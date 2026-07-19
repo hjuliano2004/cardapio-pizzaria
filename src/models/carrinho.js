@@ -2,7 +2,7 @@ import { editar } from "../../script.js";
 import { objPizza } from "../pages/pizzas.js";
 
 
- let sequence = { valor: setSequence()};
+let sequence = { valor: setSequence()};
 
 function setSequence() {
     let load = localStorage.getItem("sequence");
@@ -33,17 +33,13 @@ function dtLista() {
         let pizza = objPizza(posicao.tipo, posicao.qSabores, posicao.preco);
         pizza.setBorda({ sabor: posicao.borda, preco: posicao.precoBorda });
         pizza.setSabores(posicao.sabores);
+        pizza.setIncluido(posicao.getIncluido());
+
         lista2.push(pizza);
     }
 
     return lista2;
 }
-
-
-
-
-
-
 
 
 

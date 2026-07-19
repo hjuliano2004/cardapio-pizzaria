@@ -68,6 +68,7 @@ export function objPizza(tipo, qSabores, valor) {
     let borda = null;
     let precoBorda = 0;
     let id = sequencia();
+    let incluido = false;
 
     return {
         getTipo: () => { return type },
@@ -81,6 +82,8 @@ export function objPizza(tipo, qSabores, valor) {
         limpaSabores: () => { sabores = [] },
         getBorda: () => { return borda },
         getPrecoBorda: () => { return precoBorda },
+        getIncluido: ()=>{return incluido},
+        setIncluido: (n)=>{ return incluido = n},
         setBorda: (nborda) => {
             borda = nborda.sabor;
             precoBorda = nborda.preco;
@@ -93,7 +96,8 @@ export function objPizza(tipo, qSabores, valor) {
                 borda: borda,
                 precoBorda: precoBorda,
                 sabores: sabores,
-                qSabores: quantidade
+                qSabores: quantidade, 
+                incluido: incluido
             }
 
             return json;
