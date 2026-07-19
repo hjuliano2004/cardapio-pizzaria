@@ -1,6 +1,7 @@
 import { carrinho, delState, sequencia } from "./src/models/carrinho.js";
 import { renderBordas } from "./src/pages/borda.js";
 import { rendCarrinho } from "./src/pages/Carrinho.js";
+import { renderformEndereco } from "./src/pages/Endereco.js";
 import { renderHeader } from "./src/pages/header.js";
 import { renderListaSabores } from "./src/pages/sabores.js";
 import { tipoPizza } from "./src/pages/superior.js";
@@ -15,6 +16,7 @@ const routes = {
     "/#sabores": () => showElements([renderListaSabores]),
     "/#carrinho": () => showElements([rendCarrinho]),
     "/#bordas": () => showElements([renderBordas]),
+    "/#endereco": () => showElements([renderformEndereco]),
 };
 
 export const router = new Router(routes);
@@ -31,7 +33,7 @@ export function atualizarTipoPizza() {
 
     try {
         tipoPizza.innerText = carrinho.pizzaById(editar.pizza).getTipo();
-    }catch(e){
+    } catch (e) {
         navigate(router, "/")
     }
 

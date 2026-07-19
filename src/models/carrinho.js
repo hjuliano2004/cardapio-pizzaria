@@ -33,7 +33,7 @@ function dtLista() {
         let pizza = objPizza(posicao.tipo, posicao.qSabores, posicao.preco);
         pizza.setBorda({ sabor: posicao.borda, preco: posicao.precoBorda });
         pizza.setSabores(posicao.sabores);
-        pizza.setIncluido(posicao.getIncluido());
+        pizza.setIncluido(posicao.incluido);
 
         lista2.push(pizza);
     }
