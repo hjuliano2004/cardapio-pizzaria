@@ -153,15 +153,13 @@ header button:hover {
 
 #previa button {
   margin: 3%;
-  background-color: #b22222;
-  border: 3px solid black;
-  border-radius: 3px;
+  border: 0px solid;
+  background-color: transparent;
 }
 
 #previa button:hover {
-  background-color: rgb(209, 209, 209);
-  color: white;
   cursor: pointer;
+  border: 1px solid black;
 }
 
 #dupla-esquerda {

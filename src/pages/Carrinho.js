@@ -81,6 +81,7 @@ function clonagem(pizza) {
         let nova = objPizza(pizza.getTipo(), pizza.getMaximo(), pizza.getPrecoBase());
         nova.setSabores(sabores);
         nova.setBorda({ sabor: pizza.getBorda(), preco: pizza.getPrecoBorda() });
+        nova.setIncluido(true);
         carrinho.pizzas.push(nova);
         visualizacao();
         atualizarTotal();
@@ -169,6 +170,10 @@ function listaSabores(pizza) {
 
     return sabores;
 }
+
+pagamento.addEventListener('click', ()=>{
+    navigate(router,"/#endereco");
+})
 
 
 
