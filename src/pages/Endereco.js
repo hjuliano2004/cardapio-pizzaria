@@ -13,10 +13,20 @@ export function formulario() {
 
     // Campos do formulário
     const rua = dom("input", "", { type: "text", name: "rua", placeholder: "Rua", value: endereco.rua, required: true });
+    const labelRua = dom("label", "Rua:");
+
     const numero = dom("input", "", { type: "number", name: "numero", placeholder: "Número da casa", value: endereco.numero, required: true });
+    const labelNumero = dom("label", "Número:");
+
     const cep = dom("input", "", { type: "text", name: "cep", placeholder: "CEP: endereço automatico", value: endereco.cep });
+    const labelCep = dom("label", "Cep:");
+
     const bairro = dom("select", "", { id: "bairro" });
-    const complemento = dom("input", "", { type: "text", placeholder: "complemento", value: endereco.complemento })
+    const labelBairro = dom("label", "bairro");
+
+    const complemento = dom("input", "", { type: "text", placeholder: "complemento", value: endereco.complemento });
+    const labelComplemento = dom("label", "Complemento:");
+
 
     let padrao = dom("option", "selecione o bairro", { value: "" });
 
@@ -56,14 +66,21 @@ export function formulario() {
         })
     }
 
-
+    let divRua = dom("div", "")
 
     //adiciona os bairros disponiveis
     adotar(bairro, [padrao, ...geraBairros()]);
-    bairro.value = endereco.bairro; //é necessário declarar o bairro aqui pois os bairros são adicionados na linha anterior
-    // Adiciona os campos ao formulário
-    adotar(form, [rua, numero, bairro, cep, complemento]);
-    // Adiciona form e botão à section
+
+    bairro.value = endereco.bairro; //é necessário declarar o bairro salvo aqui pois os bairros são adicionados na linha anterior
+
+    adotar(form, [adotar(dom("div", "", { class: "lacuna" }), [labelRua, rua]),
+    adotar(dom("div", "", { class: "lacuna" }), [labelNumero, numero]),
+    adotar(dom("div", "", { class: "lacuna" }), [labelBairro, bairro]),
+    adotar(dom("div", "", { class: "lacuna" }), [labelCep, cep]),
+    adotar(dom("div", "", { class: "lacuna" }), [labelComplemento, complemento])
+    ])
+
+
     adotar(section, [form, confirm]);
 
     // Retorna a section pronta
@@ -99,7 +116,7 @@ async function validaBairro(cep, bairro, rua) {
     if (request.bairro != bairro.value || request.logradouro != rua.value) {
         window.alert("o CEP não percente ao endereço");
         cep.style.border = "1px solid red";
-    }else{
+    } else {
         cep.style.border = "";
     }
 

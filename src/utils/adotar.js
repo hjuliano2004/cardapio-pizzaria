@@ -6,9 +6,11 @@ export function adotar(pai, filhos = []) {
         try{
              pai.appendChild(filhos[i]);
         }catch{
-            console.log(`algo deu errado ${i++} vez, ${pai.innerHTML}`)
+            console.log(`algo deu errado ${i+=1} vez, ${pai.innerHTML}`)
         }
     }
+
+    return pai;
 }
 
 
