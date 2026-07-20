@@ -1,5 +1,6 @@
 import { atualizarTipoPizza, editar, root, router } from "../../script.js";
 import { carrinho, saveState } from "../models/carrinho.js";
+import { adotar, dom } from "../utils/adotar.js";
 import { Proximo } from "../utils/proximo.js";
 import { btn_retorno } from "../utils/Retorno.js";
 import { navigate } from "../utils/Router.js";
@@ -13,49 +14,38 @@ let proximo = Proximo();
 
 let bordas = [];
 
-function bordaHtml(value, preco, escolhido) {
-    let li = document.createElement("li");
-    let label = document.createElement("label");
-    let input = document.createElement("input");
-    let p = document.createElement("p");
-    let div = document.createElement("div");
+export function bordaHtml(value, preco, escolhido) {
+    const input = dom("input", "", { 
+        type: "radio", 
+        name: "borda", 
+        value: value, 
+        checked: escolhido 
+    });
 
+    const label = dom("label", value);
+    const p = dom("p", `R$${formatCoins(preco)}`, { class: "preco" });
+    const div = dom("div");
+    adotar(div, [label, p]);
 
-    input.type = "radio";
-    input.name = "borda";
-    //input.id = value;
-    input.value = value;
-
-    label.innerText = value;
-    //label.htmlFor = value;
-
-    p.innerText = `R$${formatCoins(preco)}`;
-    p.classList.add("preco");
-
-    input.checked = escolhido;
-
-
-    div.appendChild(label);
-    div.appendChild(p)
-    li.appendChild(div);
-    li.appendChild(input);
+    const li = dom("li");
+    adotar(li, [div, input]);
 
     li.addEventListener("click", () => {
-        {
+        input.checked = !input.checked;
+        const pizza = carrinho.pizzaById(editar.pizza);
 
-            input.checked = !input.checked;
-            carrinho.pizzaById(editar.pizza).setBorda({ sabor: value, preco: preco });
-
-            if (!input.checked) {
-                carrinho.pizzaById(editar.pizza).setBorda({ sabor: null, preco: 0 })
-            }
-
-            atualizarTotal();
+        if (input.checked) {
+            pizza.setBorda({ sabor: value, preco: preco });
+        } else {
+            pizza.setBorda({ sabor: null, preco: 0 });
         }
-    })
+
+        atualizarTotal();
+    });
 
     return li;
 }
+
 
 function borda(sabor, tipo, preco) {
     const gosto = sabor;

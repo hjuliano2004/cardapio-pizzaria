@@ -1,7 +1,13 @@
 export function adotar(pai, filhos = []) {
 
+    let i = 0;
+
     for (let i = 0; i < filhos.length; i++) {
-        pai.appendChild(filhos[i]);
+        try{
+             pai.appendChild(filhos[i]);
+        }catch{
+            console.log(`algo deu errado ${i++} vez, ${pai.innerHTML}`)
+        }
     }
 }
 

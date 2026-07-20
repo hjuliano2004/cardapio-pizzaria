@@ -1,13 +1,8 @@
 import { dom } from "./adotar.js";
 
 const bairros = [
-  "Adhemar Garcia", "América", "Anita Garibaldi", "Atiradores", "Aventureiro",
-  "Boa Vista", "Bom Retiro", "Bucarein", "Centro", "Comasa", "Costa e Silva",
-  "Espinheiros", "Fátima", "Floresta", "Glória", "Iririú", "Itaum", "Itinga",
-  "Jardim Paraíso", "Jarivatuba", "João Costa", "Morro do Meio", "Nova Brasília",
-  "Paranaguamirim", "Petrópolis", "Pirabeiraba", "Saguaçu", "Santo Antônio",
-  "São Marcos", "Vila Nova"
-];
+    "Aventureiro", "Boa Vista", "Bom Retiro", "Bucarein",
+    "Espinheiros", "Iririú","Jardim Paraíso", "Jarivatuba"];
 
 export function geraBairros(){
     let lista = [];
@@ -17,4 +12,16 @@ export function geraBairros(){
     }
 
     return lista;
+}
+
+export function bairroExiste(bairro){
+    let response = false;
+
+    for(let i=0;i<bairros.length;i++){
+        if(bairro == bairros[i]){
+            response = true;
+        }
+    }
+
+    return response;
 }

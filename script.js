@@ -1,4 +1,5 @@
 import { carrinho, delState, sequencia } from "./src/models/carrinho.js";
+import { limpaEndereco } from "./src/models/endereco.js";
 import { renderBordas } from "./src/pages/borda.js";
 import { rendCarrinho } from "./src/pages/Carrinho.js";
 import { renderformEndereco } from "./src/pages/Endereco.js";
@@ -39,3 +40,4 @@ export function atualizarTipoPizza() {
 
 
 }
+

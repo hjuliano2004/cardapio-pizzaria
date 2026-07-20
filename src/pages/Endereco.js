@@ -1,6 +1,8 @@
 import { root } from "../../script.js";
+import { endereco, salveEndereco } from "../models/endereco.js";
 import { adotar, dom } from "../utils/adotar.js";
-import { geraBairros } from "../utils/bairros.js";
+import { bairroExiste, geraBairros } from "../utils/bairros.js";
+import { requisicoes } from "../utils/requisicoes.js";
 
 export function formulario() {
     // Cria elementos principais
@@ -10,17 +12,57 @@ export function formulario() {
     const confirm = dom("button", "Confirmar", { type: "submit" });
 
     // Campos do formulário
-    const rua = dom("input", "", { type: "text", name: "rua", placeholder: "Rua" });
-    const numero = dom("input", "", { type: "number", name: "numero", placeholder: "Número da casa" });
-    const cep = dom("input", "", { type: "text", name: "cep", placeholder: "CEP" });
+    const rua = dom("input", "", { type: "text", name: "rua", placeholder: "Rua", value: endereco.rua, required: true });
+    const numero = dom("input", "", { type: "number", name: "numero", placeholder: "Número da casa", value: endereco.numero, required: true });
+    const cep = dom("input", "", { type: "text", name: "cep", placeholder: "CEP: endereço automatico", value: endereco.cep });
     const bairro = dom("select", "", { id: "bairro" });
+    const complemento = dom("input", "", { type: "text", placeholder: "complemento", value: endereco.complemento })
 
-    let padrao = dom("option", "selecione o bairro", {value: ""})
+    let padrao = dom("option", "selecione o bairro", { value: "" });
+
+    cep.addEventListener("input", () => {
+        porCep(rua, bairro, cep);
+        cep.style.border = "";
+    });
+
+    autoSave(rua);
+    autoSave(cep);
+    autoSave(numero);
+    autoSave(complemento);
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (!bairro.value) {
+            bairro.style.border = "1px solid red";
+            return;
+        } else {
+            bairro.style.border = "";
+        }
+
+        if (!validaBairro(cep, bairro, rua)) { return null }
+
+
+    });
+
+    confirm.addEventListener("click", () => {
+        form.requestSubmit();
+    })
+
+
+    function autoSave(e) {
+        e.addEventListener("input", () => {
+            salveEndereco(rua.value, bairro.value, cep.value, numero.value, complemento.value);
+        })
+    }
+
+
 
     //adiciona os bairros disponiveis
     adotar(bairro, [padrao, ...geraBairros()]);
+    bairro.value = endereco.bairro; //é necessário declarar o bairro aqui pois os bairros são adicionados na linha anterior
     // Adiciona os campos ao formulário
-    adotar(form, [rua, numero, bairro, cep]);
+    adotar(form, [rua, numero, bairro, cep, complemento]);
     // Adiciona form e botão à section
     adotar(section, [form, confirm]);
 
@@ -28,7 +70,71 @@ export function formulario() {
     return section;
 }
 
+
+
+
+
 export function renderformEndereco() {
     root.innerText = "";
-    let form = root.appendChild(formulario());
+    root.appendChild(formulario());
+}
+
+
+
+async function validaBairro(cep, bairro, rua) {
+
+    let cepString = limpaTraco(`${cep.value}`);
+
+    if (cepString.length < 8 || cepString.length > 8) {
+
+        cep.style.border = "1px solid red";
+
+        return null
+    } else {
+        cep.style.border = "";
+    }
+
+    let request = await requisicoes(`https://viacep.com.br/ws/${cepString}/json/`);
+
+    if (request.bairro != bairro.value || request.logradouro != rua.value) {
+        window.alert("o CEP não percente ao endereço");
+        cep.style.border = "1px solid red";
+    }else{
+        cep.style.border = "";
+    }
+
+}
+
+
+async function porCep(rua, bairro, cep) {
+
+    let cepString = limpaTraco(`${cep.value}`)
+
+    if (cepString.length < 8 || cepString.length > 8) { return null }
+
+    let request = await requisicoes(`https://viacep.com.br/ws/${cepString}/json/`);
+
+    try {
+        if (bairroExiste(request.bairro)) {
+            bairro.value = request.bairro;
+            rua.value = request.logradouro;
+            salveEndereco(rua.value, bairro.value, cep.value);
+        }
+
+    } catch (e) {
+        console.log("não foi possivel autocompletar, bairro indisponível : ");
+    }
+
+}
+
+function limpaTraco(cep) {
+    let string = "";
+
+    for (let i = 0; i < cep.length; i++) {
+        if (!isNaN(cep[i])) {
+            string = `${string}${cep[i]}`
+        }
+    }
+
+    return string;
 }
