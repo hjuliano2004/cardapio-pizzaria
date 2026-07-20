@@ -1,5 +1,6 @@
 import { editar, root, router } from "../../script.js";
 import { carrinho, sequencia } from "../models/carrinho.js";
+import { adotar, dom } from "../utils/adotar.js";
 import { navigate } from "../utils/Router.js";
 import { formatCoins } from "../utils/utils.js";
 import { renderListaSabores } from "./sabores.js";
@@ -29,34 +30,25 @@ export function rendLista() {
 
 }
 
-function Pizza(tipo, qPedacos, qSabores, preco) {
+export function Pizza(tipo, qPedacos, qSabores, preco) {
+    const li = dom("li");
 
-    let li = document.createElement("li");
-    let titulo = document.createElement("h2");
-    let p = document.createElement("p");
-    let valor = document.createElement("p");
+    const titulo = dom("h2", tipo);
+    const p = dom("p", `${qPedacos} pedaços - ${qSabores} sabores<br><br>`);
+    const valor = dom("p", `A partir de R$ ${formatCoins(preco)}`, { class: "preco" });
 
-    titulo.innerText = tipo;
-    p.innerHTML = `${qPedacos} pedaços - ${qSabores} sabores<br><br>`;
-    valor.innerText = `A partir de R$ ${formatCoins(preco)}`;
-    valor.classList.add("preco");
-
-    li.appendChild(titulo);
-    li.appendChild(p);
-    li.appendChild(valor);
-
-
+    adotar(li, [titulo, p, valor]);
 
     li.addEventListener("click", () => {
-        let novo = objPizza(tipo, qSabores, preco);
+        const novo = objPizza(tipo, qSabores, preco);
         carrinho.pizzas.push(novo);
         navigate(router, "/#sabores");
         editar.pizza = novo.getId();
     });
 
     return li;
-
 }
+
 
 
 export function objPizza(tipo, qSabores, valor) {

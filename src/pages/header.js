@@ -1,4 +1,5 @@
 import { root, router } from "../../script.js";
+import { adotar, dom } from "../utils/adotar.js";
 import { horario } from "../utils/horas.js";
 import { Proximo } from "../utils/proximo.js";
 import { navigate } from "../utils/Router.js";
@@ -7,94 +8,62 @@ import { rendLista } from "./pizzas.js";
 import { sectionPrevia } from "./previa.js";
 
 // Criar o header
-const header = document.createElement("header");
+const header = dom("header");
 export const comprarMais = maisBtn();
 
 // Imagem de destaque
-const imagemDestaque = document.createElement("img");
-imagemDestaque.id = "imagem_destaque";
-imagemDestaque.src = "./imagens/pizza.png";
-header.appendChild(imagemDestaque);
-
-// Título principal
-const titulo = document.createElement("h1");
-titulo.textContent = "Papadelli";
-header.appendChild(titulo);
+const imagemDestaque = dom("img", "", { id: "imagem_destaque", src: "./imagens/pizza.png" });
+const titulo = dom("h1", "Papadelli");
 
 // Div endereço
-const endereco = document.createElement("div");
-endereco.id = "endereco";
-
-// Link do Maps
-const mapsLink = document.createElement("a");
-mapsLink.id = "maps";
-mapsLink.href = "https://maps.app.goo.gl/vvwzj1gebsCKTkAu8";
-mapsLink.textContent = "Rua Tuiuti, 1270, Iririu, Joinville - SC, 89227-473";
-endereco.appendChild(mapsLink);
+const mapsLink = dom("a", "Rua Tuiuti, 1270, Iririu, Joinville - SC, 89227-473", {
+    id: "maps",
+    href: "https://maps.app.goo.gl/vvwzj1gebsCKTkAu8"
+});
+const endereco = dom("div", "", { id: "endereco" });
+adotar(endereco, [mapsLink]);
 
 // Seção interna do header
-const sectionHeader = document.createElement("section");
-sectionHeader.id = "header";
+const sectionHeader = dom("section", "", { id: "header" });
 
 // Formas de pagamento
-const divPagamento = document.createElement("div");
-const h4Pagamento = document.createElement("h4");
-h4Pagamento.textContent = "formas de pagamento";
-const prevPagamentosBtn = document.createElement("button");
-prevPagamentosBtn.id = "prevPagamentos";
-const cartaoImg = document.createElement("img");
-cartaoImg.id = "cartao";
-cartaoImg.src = "./imagens/cartao.png";
-prevPagamentosBtn.appendChild(cartaoImg);
-divPagamento.appendChild(h4Pagamento);
-divPagamento.appendChild(prevPagamentosBtn);
-sectionHeader.appendChild(divPagamento);
+const h4Pagamento = dom("h4", "formas de pagamento");
+const cartaoImg = dom("img", "", { id: "cartao", src: "./imagens/cartao.png" });
+const prevPagamentosBtn = dom("button", "", { id: "prevPagamentos" });
+adotar(prevPagamentosBtn, [cartaoImg]);
+const divPagamento = dom("div");
+adotar(divPagamento, [h4Pagamento, prevPagamentosBtn]);
 
 // Estimativa de entrega
-const divEntrega = document.createElement("div");
-const h4Entrega = document.createElement("h4");
-h4Entrega.textContent = "Estimativa de entrega";
-const pEntrega = document.createElement("p");
-pEntrega.textContent = "30min - 40min";
-divEntrega.appendChild(h4Entrega);
-divEntrega.appendChild(pEntrega);
-sectionHeader.appendChild(divEntrega);
+const divEntrega = dom("div");
+adotar(divEntrega, [dom("h4", "Estimativa de entrega"), dom("p", "30min - 40min")]);
 
 // Estimativa de retirada
-const divRetirada = document.createElement("div");
-const h4Retirada = document.createElement("h4");
-h4Retirada.textContent = "Estimativa de retirada";
-const pRetirada = document.createElement("p");
-pRetirada.textContent = "30min";
-divRetirada.appendChild(h4Retirada);
-divRetirada.appendChild(pRetirada);
-sectionHeader.appendChild(divRetirada);
+const divRetirada = dom("div");
+adotar(divRetirada, [dom("h4", "Estimativa de retirada"), dom("p", "30min")]);
 
 // Espaço vazio
-const divVazio = document.createElement("div");
-sectionHeader.appendChild(divVazio);
+const divVazio = dom("div");
 
 // Funcionamento
-const divFuncionamento = document.createElement("div");
-export const h4Funcionamento = document.createElement("h4");
-h4Funcionamento.textContent = "Funcionamento";
-divFuncionamento.appendChild(h4Funcionamento);
-divFuncionamento.append("terça - domingo");
-const pFuncionamento = document.createElement("p");
-pFuncionamento.id = "funcionamento";
-divFuncionamento.appendChild(pFuncionamento);
-sectionHeader.appendChild(divFuncionamento);
+export const h4Funcionamento = dom("h4", "Funcionamento");
+const pFuncionamento = dom("p", "", { id: "funcionamento" });
+const divFuncionamento = dom("div");
+adotar(divFuncionamento, [h4Funcionamento, dom("p", "terça - domingo"), pFuncionamento]);
+
+// Monta sectionHeader
+adotar(sectionHeader, [divPagamento, divEntrega, divRetirada, divVazio, divFuncionamento]);
 
 // Adicionar section dentro do endereço
-endereco.appendChild(sectionHeader);
+adotar(endereco, [sectionHeader]);
 
 // Adicionar endereço dentro do header
-header.appendChild(endereco);
+adotar(header, [imagemDestaque, titulo, endereco]);
 
-export const divCarrinhoHeader = document.createElement("div");
-divCarrinhoHeader.id = "divCarrinhoHeader";
+// Div carrinho header
+export const divCarrinhoHeader = dom("div", "", { id: "divCarrinhoHeader" });
+adotar(header, [divCarrinhoHeader]);
 
-header.appendChild(divCarrinhoHeader);
 
 prevPagamentosBtn.addEventListener("click", () => {
     sectionPrevia.style.display = "block";
