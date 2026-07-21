@@ -1,5 +1,6 @@
 import { editar } from "../../script.js";
 import { objPizza } from "../pages/pizzas.js";
+import { retirada } from "../pages/retirada.js";
 
 
 let sequence = { valor: setSequence()};
@@ -64,6 +65,7 @@ export function delState(){
 export let carrinho = {
     pizzas: dtLista(),
     bebidas: [],
+    retirada: {metodo: null, acressimo: 0},
 
     total: () => {
         let soma = 0;
@@ -78,6 +80,12 @@ export let carrinho = {
 
         return soma;
 
+    },
+
+    setRetirada: (nRetirada)=>{
+        retirada.metodo = nRetirada.metodo;
+        retirada.acressimo = nRetirada.acressimo;
+        return retirada;
     },
 
     pizzaById: (id) => {

@@ -34,7 +34,7 @@ export function Pizza(tipo, qPedacos, qSabores, preco) {
     const li = dom("li");
 
     const titulo = dom("h2", tipo);
-    const p = dom("p", `${qPedacos} pedaços - ${qSabores} sabores<br><br>`);
+    const p = dom("p", `${qPedacos} pedaços - ${qSabores} sabores`);
     const valor = dom("p", `A partir de R$ ${formatCoins(preco)}`, { class: "preco" });
 
     adotar(li, [titulo, p, valor]);

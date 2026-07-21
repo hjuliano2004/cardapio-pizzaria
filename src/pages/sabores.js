@@ -73,16 +73,16 @@ function objSabor(nome, preco, tipo, ingredientes) {
     const precoSabor = preco;
     const ingredientesSabor = ingredientes;
     const tipoSabor = tipo;
-    let valor = 0;//TODO: o valor sempre deve representar a quantidade do sabor da pizza atual
+    let valor = 0;// o valor sempre deve representar a quantidade do sabor da pizza atual
 
 
 
     try {
-        if (carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length > 0) {     //TODO lembrar de testar diferentes botões pra 
-            valor = carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length;   //TODOrenderizar a pagina sabores
+        if (carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length > 0) {     
+            valor = carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length;   
         }
 
-    } catch (e) {
+    } catch {
         //TODO ainda não descobri outro jeito de contornar a excessão sem usar try catch pra evitar quebrar a página
     }
 

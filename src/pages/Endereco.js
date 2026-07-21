@@ -3,6 +3,10 @@ import { endereco, salveEndereco } from "../models/endereco.js";
 import { adotar, dom } from "../utils/adotar.js";
 import { bairroExiste, geraBairros } from "../utils/bairros.js";
 import { requisicoes } from "../utils/requisicoes.js";
+import { btn_retorno } from "../utils/Retorno.js";
+import { barraSuperior, btnRetorno } from "./superior.js";
+
+const retorno = btn_retorno("/#carrinho");
 
 export function formulario() {
     // Cria elementos principais
@@ -87,16 +91,14 @@ export function formulario() {
     return section;
 }
 
-
-
-
-
 export function renderformEndereco() {
     root.innerText = "";
+    root.appendChild(barraSuperior);
     root.appendChild(formulario());
+
+    btnRetorno.innerText = "";
+    btnRetorno.appendChild(retorno);
 }
-
-
 
 async function validaBairro(cep, bairro, rua) {
 
