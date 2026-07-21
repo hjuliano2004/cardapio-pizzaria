@@ -66,6 +66,7 @@ export let carrinho = {
     pizzas: dtLista(),
     bebidas: [],
     retirada: {metodo: null, acressimo: 0},
+    pagamento: null,
 
     total: () => {
         let soma = 0;
@@ -78,14 +79,16 @@ export let carrinho = {
             soma += carrinho.bebidas[i].getPreco();
         }
 
+        soma += carrinho.retirada.acressimo;
+
         return soma;
 
     },
 
     setRetirada: (nRetirada)=>{
-        retirada.metodo = nRetirada.metodo;
-        retirada.acressimo = nRetirada.acressimo;
-        return retirada;
+        carrinho.retirada.metodo = nRetirada.metodo;
+        carrinho.retirada.acressimo = nRetirada.acressimo;
+        return carrinho.retirada;
     },
 
     pizzaById: (id) => {

@@ -4,6 +4,7 @@ import { renderBordas } from "./src/pages/borda.js";
 import { rendCarrinho } from "./src/pages/Carrinho.js";
 import { renderformEndereco } from "./src/pages/Endereco.js";
 import { renderHeader } from "./src/pages/header.js";
+import { pagamento } from "./src/pages/pagamento.js";
 import { retirada } from "./src/pages/retirada.js";
 import { renderListaSabores } from "./src/pages/sabores.js";
 import { tipoPizza } from "./src/pages/superior.js";
@@ -19,6 +20,7 @@ const routes = {
     "/#carrinho": () => showElements([rendCarrinho]),
     "/#bordas": () => showElements([renderBordas]),
     "/#retirada": () => showElements([retirada]),
+    "/#pagamento": () => showElements([pagamento]),
     "/#endereco": () => showElements([renderformEndereco]),
 };
 

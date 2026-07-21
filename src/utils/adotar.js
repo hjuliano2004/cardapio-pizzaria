@@ -29,6 +29,17 @@ export function dom(tipo = "div", texto = "", attrs = {}) {
 }
 
 
+export function domNs(ns, tipo = "svg", texto = "", attrs = {}) {//se usa apenas pra criar svg
+    const e = document.createElementNS(ns, tipo);
+    if (texto) e.textContent = texto;
+    for (const chave in attrs) {
+        e.setAttribute(chave, attrs[chave]);
+    }
+
+    return e;
+}
+
+
 
 
 /* Exemplo de uso:
