@@ -18,7 +18,6 @@ section.appendChild(ul);
 section.classList.add("carrinho")
 
 const pagamento = Proximo();
-pagamento.innerText = "Pagamento";
 
 function posicao(pizza) {
     const li = dom("li", "", { class: "sabores_carrinho" });
@@ -148,7 +147,7 @@ pagamento.addEventListener('click', ()=>{
 
     if(!carrinho.total()){return null}
 
-    navigate(router,"/#endereco");
+    navigate(router,"/#retirada");//TODO precisa levar pra pagina de escolhas
 })
 
 

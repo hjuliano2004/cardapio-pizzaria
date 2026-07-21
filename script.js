@@ -4,6 +4,7 @@ import { renderBordas } from "./src/pages/borda.js";
 import { rendCarrinho } from "./src/pages/Carrinho.js";
 import { renderformEndereco } from "./src/pages/Endereco.js";
 import { renderHeader } from "./src/pages/header.js";
+import { retirada } from "./src/pages/retirada.js";
 import { renderListaSabores } from "./src/pages/sabores.js";
 import { tipoPizza } from "./src/pages/superior.js";
 import { navigate, Router } from "./src/utils/Router.js";
@@ -17,6 +18,7 @@ const routes = {
     "/#sabores": () => showElements([renderListaSabores]),
     "/#carrinho": () => showElements([rendCarrinho]),
     "/#bordas": () => showElements([renderBordas]),
+    "/#retirada": () => showElements([retirada]),
     "/#endereco": () => showElements([renderformEndereco]),
 };
 

@@ -9,7 +9,8 @@ h1 {
   margin: 10px 0;
 }
 
-svg, button{
+svg,
+button {
   cursor: pointer;
 }
 
@@ -38,14 +39,14 @@ header {
   /* tom suave */
 }
 
-#comprarMais{
+#comprarMais {
   background-color: white;
   border: 1px solid black;
   border-radius: 30px;
   font-size: large;
 }
 
-#comprarMais:hover{
+#comprarMais:hover {
   transform: scale(1.03);
   box-shadow: 1px 2px 3px black;
 }
@@ -61,7 +62,7 @@ header button:hover {
   margin-top: -1%;
 }
 
-#divCarrinhoHeader{
+#divCarrinhoHeader {
   position: fixed;
   right: 1%;
   bottom: 10%;
@@ -69,7 +70,7 @@ header button:hover {
   z-index: 1000;
 }
 
-#divCarrinhoHeader button{
+#divCarrinhoHeader button {
   border: 1px solid black;
   border-radius: 10%;
 }
@@ -172,7 +173,9 @@ header button:hover {
 }
 
 .preco {
-  color: red;
+  font-size: larger;
+  font-weight: bold;
+    color: red;
 }
 
 #pizzas {
@@ -238,7 +241,7 @@ header button:hover {
   border: 0px solid;
 }
 
-.carrinho{
+.carrinho {
   padding-top: 0.3in;
   padding-bottom: 1in;
 }
@@ -275,10 +278,7 @@ header button:hover {
   box-shadow: 3px 3px 3px black;
 }
 
-.preco {
-  font-size: larger;
-  font-weight: bold;
-}
+
 
 .total {
   display: inline;
@@ -405,7 +405,7 @@ header button:hover {
   padding-left: 0;
 }
 
-.carrinho button{
+.carrinho button {
   font-size: 0.3in;
   background-color: transparent;
   border: 0px solid transparent;
@@ -423,86 +423,76 @@ header button:hover {
   margin-bottom: 1%;
 }
 
-#pizza_carrinho{
+#pizza_carrinho {
   padding-top: 5%;
 }
 
 
-#pizza_carrinho .borda{
+#pizza_carrinho .borda {
   padding-top: 1%;
   padding-bottom: 1%;
 
 }
 
-#lixo{
+#lixo {
   width: 0.3in;
   height: 0.3in;
   color: red;
 }
 
-.dp_carrinho{
+.dp_carrinho {
   margin-left: auto;
   display: grid;
   grid-template-columns: 1fr;
 }
 
-#formulario form{
+#formulario form {
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
 }
 
-.lacuna input, select{
+.lacuna input,
+select {
   width: 100%;
 }
 
-/*--------------------------------------*/
+/*----------------------------------------------------------*/
 
-#formulario {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-#formulario form {
+#retirada {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 800px;
 }
 
-#formulario label {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-#formulario input, 
-#formulario select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-#formulario input:focus, 
-#formulario select:focus {
-  border-color: #0056b3;
-  outline: none;
-}
-
-#formulario button {
-  padding: 10px;
-  background: #0056b3;
-  color: white;
-  border: none;
-  border-radius: 4px;
+.card-retirada {
+  flex: 1;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
-  margin-top: 2%;
 }
 
-#formulario button:hover {
-  background: #004896;
+.card-retirada:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card-retirada h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.card-retirada p {
+  margin-bottom: 15px;
+  color: #555;
 }
 
 
@@ -546,8 +536,16 @@ header button:hover {
   #formulario {
     width: 100%;
 
-    max-width:none;
+    max-width: none;
   }
 
+  #retirada {
+    flex-direction: column;/* organiza verticalmente */
+    align-items: stretch;
+  }
+
+  .card-retirada {
+    width: 90%;
+  }
 
 }
