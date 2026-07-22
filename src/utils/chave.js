@@ -1,0 +1,1 @@
+export const chavePix = 47997779964;

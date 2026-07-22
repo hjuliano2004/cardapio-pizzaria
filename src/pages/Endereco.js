@@ -1,16 +1,18 @@
-import { root } from "../../script.js";
+import { root, router } from "../../script.js";
 import { endereco, salveEndereco } from "../models/endereco.js";
 import { adotar, dom } from "../utils/adotar.js";
 import { bairroExiste, geraBairros } from "../utils/bairros.js";
 import { requisicoes } from "../utils/requisicoes.js";
 import { btn_retorno } from "../utils/Retorno.js";
+import { navigate } from "../utils/Router.js";
+import { atualizarTotal, divProximo, sectionInferior } from "./inferior.js";
 import { barraSuperior, btnRetorno } from "./superior.js";
 
 const retorno = btn_retorno("/#carrinho");
 
 export function formulario() {
     // Cria elementos principais
-    const section = dom("section", "", { id: "formulario" });
+    const section = dom("section", "", { id: "formulario-endereco" });
 
     const form = dom("form");
     const confirm = dom("button", "Confirmar", { type: "submit" });
@@ -56,12 +58,17 @@ export function formulario() {
 
         if (!validaBairro(cep, bairro, rua)) { return null }
 
+        navigate(router, "/#pagamento");
+
 
     });
 
     confirm.addEventListener("click", () => {
         form.requestSubmit();
     })
+
+    divProximo.innerText = "";
+    adotar(divProximo, [confirm]);
 
 
     function autoSave(e) {
@@ -85,7 +92,7 @@ export function formulario() {
     ])
 
 
-    adotar(section, [form, confirm]);
+    adotar(section, [form]);
 
     // Retorna a section pronta
     return section;
@@ -98,6 +105,10 @@ export function renderformEndereco() {
 
     btnRetorno.innerText = "";
     btnRetorno.appendChild(retorno);
+
+    root.appendChild(sectionInferior);
+
+    atualizarTotal()
 }
 
 async function validaBairro(cep, bairro, rua) {
