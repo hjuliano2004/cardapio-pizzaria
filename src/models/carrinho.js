@@ -1,6 +1,7 @@
 import { editar } from "../../script.js";
 import { objPizza } from "../pages/pizzas.js";
 import { retirada } from "../pages/retirada.js";
+import { endereco } from "./endereco.js";
 
 
 let sequence = { valor: setSequence()};
@@ -54,19 +55,54 @@ export function saveState() {
     localStorage.setItem("pizzas", JSON.stringify(listaPizzas));
     localStorage.setItem("sequence", sequence.valor);
     localStorage.setItem("editar.pizza", editar.pizza);
+    localStorage.setItem("retirada", JSON.stringify(carrinho.retirada))
+
+}
+
+function loadRetirada(){
+    let retirada = JSON.parse(localStorage.getItem("retirada"));
+    if(!retirada){return {metodo: null, acressimo: 0}}
+    return retirada;
 }
 
 export function delState(){
     localStorage.removeItem("pizzas");
+    localStorage.removeItem("bebidas");
     localStorage.removeItem("sequence");
+    localStorage.removeItem("editar.pizza");
+    localStorage.removeItem("retirada");
+
+    carrinho.pizzas = dtLista();
+    carrinho.bebidas = [];
+    carrinho.etirada = loadRetirada();
+    carrinho.pagamento = null;
 }
 
 
 export let carrinho = {
     pizzas: dtLista(),
     bebidas: [],
-    retirada: {metodo: null, acressimo: 0},
+    retirada: loadRetirada(),
     pagamento: null,
+    resposta: ()=>{
+        return {
+            pizzas: (()=>{
+                let listaPizzas = [];
+
+                for(let i=0; i<carrinho.pizzas.length;i++){
+                    listaPizzas.push(carrinho.pizzas[i].getAnotacao())
+                }
+                return listaPizzas;
+            })(),
+
+            bebidas: carrinho.bebidas,
+            retirada: carrinho.retirada,
+            pagamento: carrinho.pagamento,
+            total: carrinho.total(),
+            endereco: endereco
+        }
+
+    },
 
     total: () => {
         let soma = 0;

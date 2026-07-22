@@ -9,13 +9,13 @@ import { atualizarTotal, divProximo, listaInferior, sectionInferior } from "./in
 import { objPizza } from "./pizzas.js";
 import { barraSuperior, btnRetorno, div_carrinho, tipoPizza } from "./superior.js";
 
-let section = document.createElement("section");
-let ul = document.createElement("ul");
+const section = document.createElement("section");
+const ul = document.createElement("ul");
 export const btn_carrinho = BtnCarrinho();
 ul.id = "pizza_carrinho";
 ul.classList.add("carrinho");
 section.appendChild(ul);
-section.classList.add("carrinho")
+section.classList.add("carrinho");
 
 const pagamento = Proximo();
 
@@ -120,6 +120,7 @@ function excluir(pizza) {
         visualizacao();
         atualizarTotal();
         saveState();
+        mensagemVazio()
     });
 
     return btn;
@@ -143,15 +144,12 @@ function listaSabores(pizza) {
     return sabores;
 }
 
-pagamento.addEventListener('click', ()=>{
+pagamento.addEventListener('click', () => {
 
-    if(!carrinho.total()){return null}
+    if (!carrinho.total()) { return null }
 
-    navigate(router,"/#retirada");//TODO precisa levar pra pagina de escolhas
-})
-
-
-
+    navigate(router, "/#retirada");//TODO precisa levar pra pagina de escolhas
+});
 
 function visualizacao() {
 
@@ -181,7 +179,28 @@ export function rendCarrinho() {
     visualizacao();
     atualizarTotal();
     saveState();
+    mensagemVazio();
 }
+
+
+function mensagemVazio() {
+
+    const classe = "carrinho-vazio"
+
+    if (!carrinho.pizzas.length && !carrinho.bebidas.length) {
+        adotar(ul, [
+            dom("div", "o carrinho está vazio", { class:  classe})
+        ])
+    } else {
+        let d = document.getElementsByClassName(classe);
+        for(let i=0;i<d.length;i++){
+            d[i].remove();
+        }
+        
+    }
+
+}
+
 
 function revisa() {
     for (let i = 0; i < carrinho.pizzas.length; i++) {

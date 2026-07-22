@@ -3,6 +3,8 @@ import { carrinho } from "../models/carrinho.js";
 import { adotar, dom, domNs } from "../utils/adotar.js";
 import { btn_retorno } from "../utils/Retorno.js";
 import { navigate } from "../utils/Router.js";
+import { mensagem } from "../utils/whatsapp.js";
+import { confirmacao } from "./confirmacao.js";
 import { atualizarTotal, divProximo, sectionInferior } from "./inferior.js";
 import { formas } from "./previa.js";
 import { barraSuperior, btnRetorno } from "./superior.js";
@@ -13,12 +15,8 @@ function metodos() {
     const section = dom("section", "", { id: "pagamento" });
     const ul = dom("ul", "", { id: "lista-pagamentos" });
 
-    adotar(ul, [lDinheiro()]);
+    adotar(ul, [lDinheiro(ul)]);
     listagem(ul);
-
-
-
-
 
     return adotar(section, [ul]);
 }
@@ -36,12 +34,12 @@ function listagem(ul) {
             adotar(li, [img, p])
         ])
 
-        acao(li, formas[i].texto);
+        acao(li, formas[i].texto, ul);
 
     }
 }
 
-function lDinheiro() {
+function lDinheiro(ul) {
 
     const liDinheiro = dom("li");
 
@@ -58,12 +56,12 @@ function lDinheiro() {
     adotar(liDinheiro, [svgDinheiro, dom("p", "Dinheiro")]);
 
 
-    acao(liDinheiro, "Dinheiro");
+    acao(liDinheiro, "Dinheiro", ul);
 
     return liDinheiro;
 }
 
-function acao(li, texto) {
+function acao(li, mPagamento, ul) {
 
     //if (texto == "Pix") {
 
@@ -72,11 +70,9 @@ function acao(li, texto) {
 
     li.addEventListener("click", () => {
 
-        carrinho.pagamento = texto;
+        carrinho.pagamento = mPagamento;
+        confirmacao(mPagamento, ul);
 
-        console.log(texto);
-
-        navigate(router, "/#finalizar");
     });
 
     

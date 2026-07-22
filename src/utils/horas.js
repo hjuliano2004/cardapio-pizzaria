@@ -44,6 +44,32 @@ export function horario(){
         h4Funcionamento.style.color = "red";
     }
 
+}
 
+export function espera(espera){//essa função não funciona se houver mais de 1 hora de espera
+    let agora = new Date();
 
+    let hora = agora.getHours();
+    let min = agora.getMinutes();
+
+    if((min + espera) > 60){
+        hora++;
+        min = (min + espera) - 60;
+        return `${mins(hora)}:${mins(min)}`;
+    }
+
+    min = min + espera;
+
+    return `${mins(hora)}:${mins(min)}`;
+
+}
+
+function mins(min){
+    let string = `${min}`;
+
+    if(string.length == 1){
+        return `0${string}`;
+    }
+
+    return string;
 }

@@ -434,6 +434,7 @@ header button:hover {
 
 }
 
+
 #lixo {
   width: 0.3in;
   height: 0.3in;
@@ -445,7 +446,34 @@ header button:hover {
   display: grid;
   grid-template-columns: 1fr;
 }
+/*--------------------------------------------------------*/
 
+.carrinho-vazio {
+  margin: 20px auto;
+  padding: 15px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #555;
+  background: #f0f0f0;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  max-width: 400px;
+  animation: fadeIn 0.3s ease;
+}
+
+.carrinho-vazio::before {
+  content: "🛒 ";
+  font-size: 1.4rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+/*--------------------------------------------------------*/
 #formulario form {
   display: grid;
   grid-template-columns: 1fr;
@@ -460,7 +488,7 @@ select {
 /*----------------------------------------------------------*/
 
 #retirada {
-  padding-top: 5%;
+  
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -529,14 +557,137 @@ select {
   height: 0.5in;
 }
 
+#nome-usuario{
+  padding-top: 5%;
+  text-align: center;
+}
+
+#nome-usuario input{
+  width: 40%;
+  font-size: large;
+}
+
+#nome-usuario label{
+  font-size: large;
+}
+
+/*-------------------------------------*/
 
 
+#formulario-endereco {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding-top: 5%;
+}
+
+#formulario-endereco form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lacuna {
+  display: flex;
+  flex-direction: column;
+}
+
+.lacuna label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #555;
+}
+
+.lacuna input,
+.lacuna select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.lacuna input:focus,
+.lacuna select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+#formulario-endereco button {
+  margin-top: 10px;
+  padding: 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#formulario-endereco button:hover {
+  background: #0056b3;
+}
+
+/*-----------------------------------------------------------*/
 
 
+.confirmacao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  margin-top: 15px;
+  background: white; /* amarelo suave de alerta */
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  animation: fadeIn 0.3s ease;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+}
 
+.confirmacao p {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #856404;
+  text-align: center;
+}
 
+.confirmacao button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
 
+.confirmacao button:first-of-type {
+  background: #dc3545; /* vermelho para cancelar */
+  color: white;
+}
 
+.confirmacao button:first-of-type:hover {
+  background: #b52a37;
+}
+
+.confirmação button:last-of-type {
+  background: #28a745; /* verde para confirmar */
+  color: white;
+}
+
+.confirmacao button:last-of-type:hover {
+  background: #1e7e34;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 
 
@@ -594,5 +745,13 @@ select {
   #lista-pagamentos{
     padding-top: 10%;
   }
+
+  #nome-usuario{
+  padding-top: 1%;
+}
+
+#formulario-endereco{
+  padding-top: 10%;
+}
 
 }

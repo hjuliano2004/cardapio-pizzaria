@@ -5,9 +5,9 @@ export let endereco = load();
 
         if (!endereco) {
             return {
-                bairro: "",
                 rua: "",
                 numero: "",
+                bairro: "",
                 cep: "",
                 complemento: ""
             }
@@ -18,11 +18,11 @@ export let endereco = load();
 
     export function salveEndereco(rua, bairro, cep, numero = 0, complemento){
 
-        if(rua){endereco.rua = rua;}
-        if(bairro){endereco.bairro = bairro;}
-        if(cep){endereco.cep = cep;}
-        if(numero > 0){endereco.numero = numero}
-        if(complemento){endereco.complemento = complemento}
+        endereco.rua = rua;
+        endereco.bairro = bairro;
+        endereco.cep = cep;
+        endereco.numero = numero
+        endereco.complemento = complemento
 
         localStorage.setItem("endereco", JSON.stringify(endereco));
     }
@@ -31,3 +31,11 @@ export let endereco = load();
     export function limpaEndereco(){
         localStorage.removeItem("endereco")
     }
+
+
+        /**        if(rua){endereco.rua = rua;}
+        if(bairro){endereco.bairro = bairro;}
+        if(cep){endereco.cep = cep;}
+        if(numero > 0){endereco.numero = numero}
+        if(complemento){endereco.complemento = complemento}
+ */
