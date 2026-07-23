@@ -9,9 +9,7 @@ import { Proximo } from "../utils/proximo.js";
 import { btn_carrinho } from "./Carrinho.js";
 
 
-
-
-let retorno1 = btn_retorno("/");
+let retorno1 = btn_retorno("/#pizzas");
 let proximo1 = Proximo();
 
 
@@ -38,8 +36,6 @@ function Sabor(nome, preco, ingredientes, num, addf, delf) {
         delf();
     })
 
-
-
     let p = document.createElement("h3");
     //let valor = document.createElement("p");
     let descricao = document.createElement("p");
@@ -58,9 +54,6 @@ function Sabor(nome, preco, ingredientes, num, addf, delf) {
     cel2.appendChild(dp);
     cel2.appendChild(add);
 
-
-
-
     li.appendChild(cel);
     li.appendChild(cel2);
 
@@ -75,11 +68,9 @@ function objSabor(nome, preco, tipo, ingredientes) {
     const tipoSabor = tipo;
     let valor = 0;// o valor sempre deve representar a quantidade do sabor da pizza atual
 
-
-
     try {
-        if (carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length > 0) {     
-            valor = carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length;   
+        if (carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length > 0) {
+            valor = carrinho.pizzaById(editar.pizza).getSabores().filter((sabor) => sabor === nomeSabor).length;
         }
 
     } catch {
@@ -110,8 +101,6 @@ function objSabor(nome, preco, tipo, ingredientes) {
         }
 
     }
-
-
 
     return {
         getNome: () => { return nomeSabor },
@@ -166,9 +155,9 @@ export function renderListaSabores() {
 }
 
 retorno1.addEventListener("click", () => {
-    
 
-    if(!carrinho.pizzaById(editar.pizza).getIncluido()){
+
+    if (!carrinho.pizzaById(editar.pizza).getIncluido()) {
         carrinho.delPizza(editar.pizza);
         saveState();
     }

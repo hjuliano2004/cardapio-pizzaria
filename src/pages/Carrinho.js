@@ -126,9 +126,6 @@ function excluir(pizza) {
     return btn;
 }
 
-
-
-
 function listaSabores(pizza) {
 
     let lista = pizza.getSabores();
@@ -187,7 +184,7 @@ function mensagemVazio() {
 
     const classe = "carrinho-vazio"
 
-    if (!carrinho.pizzas.length && !carrinho.bebidas.length) {
+    if (!carrinho.pizzas.length && !qBebidas()) {//se os valores forem zero, ele considera o carrinho vazio
         adotar(ul, [
             dom("div", "o carrinho está vazio", { class:  classe})
         ])
@@ -198,7 +195,15 @@ function mensagemVazio() {
         }
         
     }
+}
 
+function qBebidas(){//avalia se as bebidas do carrinho tem algum valor selecionado
+    let numero = 0;
+    let lista = carrinho.bebidas;
+    for(let i=0;i<lista.length;i++){
+        numero += lista[i].getQuantidade();
+    }
+    return numero;
 }
 
 

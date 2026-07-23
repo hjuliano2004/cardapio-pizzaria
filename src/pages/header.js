@@ -4,7 +4,6 @@ import { horario } from "../utils/horas.js";
 import { Proximo } from "../utils/proximo.js";
 import { navigate } from "../utils/Router.js";
 import { btn_carrinho } from "./Carrinho.js";
-import { rendLista } from "./pizzas.js";
 import { sectionPrevia } from "./previa.js";
 
 // Criar o header
@@ -64,6 +63,22 @@ adotar(header, [imagemDestaque, titulo, endereco]);
 export const divCarrinhoHeader = dom("div", "", { id: "divCarrinhoHeader" });
 adotar(header, [divCarrinhoHeader]);
 
+export const cardapios = dom("ul", "", {id: "cardapio"})
+
+const cardapioPizzas = dom("li", "Pizzas");
+const cardapioBebidas = dom("li", "Bebidas");
+
+adotar(cardapios, [cardapioPizzas, cardapioBebidas])
+
+adotar(header, [cardapios]);
+
+cardapioPizzas.addEventListener("click", ()=>{
+    navigate(router, "/#pizzas")
+})
+cardapioBebidas.addEventListener("click", ()=>{
+    navigate(router, "/#bebidas")
+})
+
 
 prevPagamentosBtn.addEventListener("click", () => {
     sectionPrevia.style.display = "block";
@@ -77,7 +92,7 @@ export function renderHeader() {
     divCarrinhoHeader.appendChild(btn_carrinho);
 
     horario();
-    rendLista();
+
 }
 
 
@@ -92,7 +107,6 @@ function maisBtn(){
         navigate(router, "/");
 
     })
-
 
     return btn;
 }
