@@ -1,56 +1,48 @@
 import { editar } from "../../script.js";
 import { carrinho } from "../models/carrinho.js";
+import { adotar, dom } from "../utils/adotar.js";
 import { formatCoins } from "../utils/utils.js";
 
 // Criar a section principal
-export const sectionInferior = document.createElement("section");
-sectionInferior.style.zIndex = 1000;
-sectionInferior.id = "inferior";
-sectionInferior.className = "inferior";
+export const sectionInferior = dom("section", "", { 
+    id: "inferior", 
+    class: "inferior", 
+    style: "z-index:1000" 
+});
 
 // Lista vazia
-export const listaInferior = document.createElement("ul");
-listaInferior.className = "lista";
-sectionInferior.appendChild(listaInferior);
+export const listaInferior = dom("ul", "", { class: "lista" });
+adotar(sectionInferior, [listaInferior]);
 
 // Div base
-const divBase = document.createElement("div");
-divBase.className = "base";
+const divBase = dom("div", "", { class: "base" });
 
 // Parágrafo total
-export const pTotal = document.createElement("p");
-pTotal.className = "total";
-pTotal.textContent = "total";
+export const pTotal = dom("p", "total", { class: "total" });
 
-// Botão próximo
-export const divProximo = document.createElement("div");
+// Botão próximo (div container)
+export const divProximo = dom("div");
 
 // Montar div base
-divBase.appendChild(pTotal);
-divBase.appendChild(divProximo);
+adotar(divBase, [pTotal, divProximo]);
 
 // Adicionar div base à section
-sectionInferior.appendChild(divBase);
+adotar(sectionInferior, [divBase]);
 
-
-
+// Função atualizar total
 export function atualizarTotal() {
-
     let total = carrinho.total();
-
     pTotal.innerHTML = `total: <span class="preco">${formatCoins(total)}</span>`;
 }
 
+// Função para listar sabores
 export function nLi() {
-
     listaInferior.innerText = "";
 
     let pizza = carrinho.pizzaById(editar.pizza);
 
-    for (let i = 0; i < pizza.getSabores().length; i++) {
-        let li = document.createElement("li");
-        li.innerText = pizza.getSabores()[i];
-
-        listaInferior.appendChild(li);
+    for (let sabor of pizza.getSabores()) {
+        let li = dom("li", sabor);
+        adotar(listaInferior, [li]);
     }
 }

@@ -1,6 +1,7 @@
 import { editar } from "../../script.js";
 import { objPizza } from "../pages/pizzas.js";
 import { retirada } from "../pages/retirada.js";
+import { listaBebidas } from "./bebida.js";
 import { endereco } from "./endereco.js";
 
 
@@ -67,7 +68,7 @@ function loadRetirada(){
 
 export function delState(){
     localStorage.removeItem("pizzas");
-    localStorage.removeItem("bebidas");
+    //localStorage.removeItem("bebidas");
     localStorage.removeItem("sequence");
     localStorage.removeItem("editar.pizza");
     localStorage.removeItem("retirada");
@@ -81,7 +82,7 @@ export function delState(){
 
 export let carrinho = {
     pizzas: dtLista(),
-    bebidas: [],
+    bebidas: listaBebidas(),
     retirada: loadRetirada(),
     pagamento: null,
     resposta: ()=>{
@@ -90,7 +91,7 @@ export let carrinho = {
                 let listaPizzas = [];
 
                 for(let i=0; i<carrinho.pizzas.length;i++){
-                    listaPizzas.push(carrinho.pizzas[i].getAnotacao())
+                    listaPizzas.push(carrinho.pizzas[i].getAnotacao());
                 }
                 return listaPizzas;
             })(),

@@ -1,20 +1,29 @@
 import { editar, root, router } from "../../script.js";
 import { carrinho, sequencia } from "../models/carrinho.js";
 import { adotar, dom } from "../utils/adotar.js";
+import { btn_retorno } from "../utils/Retorno.js";
 import { navigate } from "../utils/Router.js";
 import { formatCoins } from "../utils/utils.js";
 import { renderListaSabores } from "./sabores.js";
+import { barraSuperior, btnRetorno, tipoPizza } from "./superior.js";
 
 let listaPizzas = [];
 
-export let ul = document.createElement("ul");
-ul.id = "pizzas";
 
-export function rendLista() {
+const retorno = btn_retorno("/");
+const section = dom("section");
+
+export function rendPizzas() {
+   // limpa();
+    const ul = dom("ul", "", { class: "pizzas" });
 
     listaPizzas = [];
-    ul.innerHTML = "";
-    root.appendChild(ul);
+    root.innerHTML = "";
+    btnRetorno.innerText = "";
+    tipoPizza.innerText = "Pizzas"
+    adotar(section, [barraSuperior, ul]);
+    adotar(btnRetorno, [retorno]);
+    adotar(root, [section]);
 
     listaPizzas.push(Pizza("Broto", 4, 1, 30));
     listaPizzas.push(Pizza("Média", 8, 2, 40));
@@ -29,6 +38,15 @@ export function rendLista() {
     }
 
 }
+
+function limpa() {
+    let ul = document.getElementsByClassName("pizzas");
+
+    for (let i = 0; i < ul.length; i++) {
+        ul[i].remove();
+    }
+}
+
 
 export function Pizza(tipo, qPedacos, qSabores, preco) {
     const li = dom("li");
@@ -68,14 +86,14 @@ export function objPizza(tipo, qSabores, valor) {
         getPreco: () => { return preco + precoBorda },
         getPrecoBase: () => { return preco },
         getId: () => { return id },
-        setId: (nId) => { return id = nId},
+        setId: (nId) => { return id = nId },
         getSabores: () => { return sabores },
         setSabores: (nLista) => { return sabores = nLista },
         limpaSabores: () => { sabores = [] },
         getBorda: () => { return borda },
         getPrecoBorda: () => { return precoBorda },
-        getIncluido: ()=>{return incluido},
-        setIncluido: (n)=>{ return incluido = n},
+        getIncluido: () => { return incluido },
+        setIncluido: (n) => { return incluido = n },
         setBorda: (nborda) => {
             borda = nborda.sabor;
             precoBorda = nborda.preco;
@@ -88,7 +106,7 @@ export function objPizza(tipo, qSabores, valor) {
                 borda: borda,
                 precoBorda: precoBorda,
                 sabores: sabores,
-                qSabores: quantidade, 
+                qSabores: quantidade,
                 incluido: incluido
             }
 
