@@ -1,6 +1,6 @@
 import { root, router } from "../../script.js";
 import { carrinho, saveState } from "../models/carrinho.js";
-import { cliente, saveCliente } from "../models/cliente.js";
+import { cliente, comentario, saveCliente, saveComentario } from "../models/cliente.js";
 import { adotar, dom } from "../utils/adotar.js";
 import { btn_retorno } from "../utils/Retorno.js";
 import { navigate } from "../utils/Router.js";
@@ -13,15 +13,20 @@ function opcoes() {
 
     const acressimo = 10;
 
-    const section = dom("section", "");
-    const div = adotar(dom("div", "", { id: "nome-usuario" }), [
-        dom("label", "Nome: ")])
+    const section = dom("section", "", {id: "sect_metodo"});
+    const div = adotar(dom("div", "", { id: "nome-usuario" }), [dom("label", "Nome: ")])
 
     const input = dom("input", "", { type: "text", placeholder: "seu nome", value: cliente });
+    const label2 = dom("label", "Observações: ", {for: "observacoes"})
+    const input2 = dom("input", "", {type: "text", placeholder: "comente sobre o pedido",id: "observacoes", value: comentario})
 
     input.addEventListener("input", () => {
         saveCliente(input.value);
         input.style.border = "";
+    })
+
+    input2.addEventListener("input", ()=>{
+        saveComentario(input2.value)
     })
 
     const div2 = dom("div", "", { id: "retirada" })
@@ -53,7 +58,7 @@ function opcoes() {
         saveState();
     })
 
-    adotar(div, [input])
+    adotar(div, [input, adotar(dom("div"), [label2, input2])])
     adotar(div2, [div, card, card2]);
     adotar(section, [div, div2]);
     return section;

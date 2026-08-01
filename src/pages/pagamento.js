@@ -81,13 +81,19 @@ function acao(li, mPagamento, ul) {
 
 
 export function pagamento() {
+    vazio();
     root.innerText = ""
-
-
     adotar(root, [barraSuperior, metodos(), sectionInferior]);
     btnRetorno.innerText = "";
     adotar(btnRetorno, [retorno]);
     atualizarTotal();
     divProximo.innerText = "";
 
+}
+
+export function vazio(){//evita carregar paginas onde o carrinho deve conter ao menos alguma coisa
+
+    if(carrinho.pizzas.length == 0 && carrinho.bebidas.length == 0){
+        navigate(router, "/")
+    }
 }
