@@ -143,7 +143,7 @@ function listaSabores(pizza) {//retorna lista <ul> com sabores pertencentes a um
 
 function bebidaLi(bebida, nomes) {
 
-    for(let i=0;i<nomes.length;i++){
+    for(let i=0;i<nomes.length;i++){//esse laço garante que nenhuma bebida será duplicada na lista ul mesmo quando existir mais de 1 
         if(nomes[i] === bebida.getNome()){
             return null;
         }
