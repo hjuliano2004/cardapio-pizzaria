@@ -1,4 +1,9 @@
 /* Fonte para títulos */
+li {
+  list-style: none;
+  margin: 0;
+}
+
 h1 {
   text-align: center;
   font-family: 'Playfair Display', serif;
@@ -175,7 +180,7 @@ header button:hover {
 .preco {
   font-size: larger;
   font-weight: bold;
-    color: red;
+  color: red;
 }
 
 .pizzas {
@@ -421,6 +426,7 @@ header button:hover {
 }
 
 #pizza_carrinho {
+  padding: 0%;
   padding-top: 5%;
 }
 
@@ -443,6 +449,7 @@ header button:hover {
   display: grid;
   grid-template-columns: 1fr;
 }
+
 /*--------------------------------------------------------*/
 
 .carrinho-vazio {
@@ -465,8 +472,15 @@ header button:hover {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 
@@ -485,7 +499,7 @@ select {
 /*----------------------------------------------------------*/
 
 #retirada {
-  
+
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -500,14 +514,14 @@ select {
   border-radius: 8px;
   padding: 20px;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
 
 .card-retirada:hover {
   transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .card-retirada h3 {
@@ -523,7 +537,7 @@ select {
 
 /*-------------------------------------------*/
 
-#lista-pagamentos{
+#lista-pagamentos {
   list-style: none;
   display: grid;
   gap: 3%;
@@ -531,7 +545,7 @@ select {
   padding-top: 5%;
 }
 
-#lista-pagamentos li{
+#lista-pagamentos li {
   display: flex;
   flex-wrap: wrap;
   gap: 1%;
@@ -540,31 +554,31 @@ select {
   padding-left: 1%;
 }
 
-#lista-pagamentos li:hover{
+#lista-pagamentos li:hover {
   transform: scale(1.01);
 }
 
-#lista-pagamentos img{
+#lista-pagamentos img {
   width: 0.5in;
   height: 0.5in;
 }
 
-#lista-pagamentos svg{
+#lista-pagamentos svg {
   width: 0.5in;
   height: 0.5in;
 }
 
-#nome-usuario{
+#nome-usuario {
   padding-top: 5%;
   text-align: center;
 }
 
-#nome-usuario input{
+#nome-usuario input {
   width: 40%;
   font-size: large;
 }
 
-#nome-usuario label{
+#nome-usuario label {
   font-size: large;
 }
 
@@ -577,7 +591,7 @@ select {
   padding: 20px;
   background: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   padding-top: 5%;
 }
 
@@ -638,9 +652,10 @@ select {
   gap: 12px;
   padding: 20px;
   margin-top: 15px;
-  background: white; /* amarelo suave de alerta */
+  background: white;
+  /* amarelo suave de alerta */
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.3s ease;
   position: fixed;
   left: 50%;
@@ -664,7 +679,8 @@ select {
 }
 
 .confirmacao button:first-of-type {
-  background: #dc3545; /* vermelho para cancelar */
+  background: #dc3545;
+  /* vermelho para cancelar */
   color: white;
 }
 
@@ -673,7 +689,8 @@ select {
 }
 
 .confirmação button:last-of-type {
-  background: #28a745; /* verde para confirmar */
+  background: #28a745;
+  /* verde para confirmar */
   color: white;
 }
 
@@ -682,43 +699,19 @@ select {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /*-----------------------------------------------------------------------*/
-/*
 
-#cardapio {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  list-style: none;
-  margin: 15px 0 0 0;
-  padding: 0;
-}
-
-#cardapio li {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333;
-  cursor: pointer;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-#cardapio li:hover {
-  background: #f0f0f0;
-  color: #d32f2f; /* tom vermelho para combinar com pizza *//*
-}
-
-#cardapio li.active {
-  background: #d32f2f;
-  color: #fff;
-}
-
-*/
 
 #cardapio {
   display: flex;
@@ -731,7 +724,8 @@ select {
 
 #cardapio li {
   background: #fff;
-  border: 2px solid #d32f2f; /* vermelho pizza */
+  border: 2px solid #d32f2f;
+  /* vermelho pizza */
   border-radius: 6px;
   padding: 10px 18px;
   font-size: 1rem;
@@ -739,14 +733,14 @@ select {
   color: #d32f2f;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #cardapio li:hover {
   background: #d32f2f;
   color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #cardapio li.active {
@@ -757,14 +751,65 @@ select {
 
 
 /*-------------------------------------------------*/
+#section-bebidas {
+  padding-top: 5%;
+}
+
+.container1 figure {
+  width: 1in;
+  height: 1in;
+  padding: 0%;
+  margin: 0%;
+}
+
+.container1 img {
+  width: 100%;
+  height: 100%;
+
+}
+
+.bebida {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  padding-right: 10%;
+}
+
+ .container1 {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* imagem ocupa espaço fixo, info ocupa o restante */
+  align-items: center;
+  /* centraliza verticalmente */
+  gap: 8px;
+  /* controla a distância entre imagem e info */
+}
 
 
+/*.bebida */
 
 
+.container2 {
+  vertical-align: middle;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 0.5in;
+  height: 0.5in;
+  margin-left: auto;
+  gap: 20%;
+}
 
+.container2>* {
+  background-color: transparent;
+  border: 0px solid;
+  text-align: center;
+  font-size: xx-large;
 
+}
 
-
+#ul-bebidas {
+  padding: 0%;
+  padding-bottom: 10%;
+}
 
 
 /* Layout para telas menores (celular) */
@@ -808,7 +853,8 @@ select {
   }
 
   #retirada {
-    flex-direction: column;/* organiza verticalmente */
+    flex-direction: column;
+    /* organiza verticalmente */
     align-items: stretch;
   }
 
@@ -816,16 +862,20 @@ select {
     width: 90%;
   }
 
-  #lista-pagamentos{
+  #lista-pagamentos {
     padding-top: 10%;
   }
 
-  #nome-usuario{
-  padding-top: 1%;
-}
+  #nome-usuario {
+    padding-top: 1%;
+  }
 
-#formulario-endereco{
-  padding-top: 10%;
-}
+  #formulario-endereco {
+    padding-top: 10%;
+  }
+
+  #ul-bebidas {
+    padding-bottom: 20%;
+  }
 
 }

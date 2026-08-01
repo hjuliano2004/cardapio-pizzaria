@@ -1,15 +1,15 @@
 import { editar } from "../../script.js";
 import { objPizza } from "../pages/pizzas.js";
 import { retirada } from "../pages/retirada.js";
-import { listaBebidas } from "./bebida.js";
+import { Bebida } from "./bebida.js";
 import { endereco } from "./endereco.js";
 
 
-let sequence = { valor: setSequence()};
+let sequence = { valor: setSequence() };
 
 function setSequence() {
     let load = localStorage.getItem("sequence");
-    if(!load){return 0}
+    if (!load) { return 0 }
     return load;
 }
 
@@ -44,31 +44,57 @@ function dtLista() {
     return lista2;
 }
 
+function loadBebidas() {
+    let string = "bebidas";
+
+    let lista = JSON.parse(localStorage.getItem(string));
+
+    if (!lista) {
+        localStorage.setItem(string, JSON.stringify([]));
+        return [];
+    }
+
+    let lista2 = []
+
+    for(let i=0;i<lista.length;i++){
+        let posicao = lista[i];
+
+        lista2.push(Bebida(posicao.nome, posicao.volume, posicao.preco, posicao.src));
+    }
+
+    return lista2;
+}
 
 
 export function saveState() {
     let pizzas = carrinho.pizzas;
+    let bebidas = carrinho.bebidas;
     let listaPizzas = [];
+    let listaBebidas = [];
     for (let i = 0; i < pizzas.length; i++) {
         listaPizzas.push(pizzas[i].getAnotacao());
     }
+    for (let i = 0; i < bebidas.length; i++) {
+        listaBebidas.push(bebidas[i].getAnotacao())
+    }
+
 
     localStorage.setItem("pizzas", JSON.stringify(listaPizzas));
+    localStorage.setItem("bebidas", JSON.stringify(listaBebidas));
     localStorage.setItem("sequence", sequence.valor);
     localStorage.setItem("editar.pizza", editar.pizza);
-    localStorage.setItem("retirada", JSON.stringify(carrinho.retirada))
-
+    localStorage.setItem("retirada", JSON.stringify(carrinho.retirada));
 }
 
-function loadRetirada(){
+function loadRetirada() {
     let retirada = JSON.parse(localStorage.getItem("retirada"));
-    if(!retirada){return {metodo: null, acressimo: 0}}
+    if (!retirada) { return { metodo: null, acressimo: 0 } }
     return retirada;
 }
 
-export function delState(){
+export function delState() {
     localStorage.removeItem("pizzas");
-    //localStorage.removeItem("bebidas");
+    localStorage.removeItem("bebidas");
     localStorage.removeItem("sequence");
     localStorage.removeItem("editar.pizza");
     localStorage.removeItem("retirada");
@@ -80,17 +106,18 @@ export function delState(){
 }
 
 
+
 export let carrinho = {
     pizzas: dtLista(),
-    bebidas: listaBebidas(),
+    bebidas: loadBebidas(),
     retirada: loadRetirada(),
     pagamento: null,
-    resposta: ()=>{
+    resposta: () => {
         return {
-            pizzas: (()=>{
+            pizzas: (() => {
                 let listaPizzas = [];
 
-                for(let i=0; i<carrinho.pizzas.length;i++){
+                for (let i = 0; i < carrinho.pizzas.length; i++) {
                     listaPizzas.push(carrinho.pizzas[i].getAnotacao());
                 }
                 return listaPizzas;
@@ -102,7 +129,6 @@ export let carrinho = {
             total: carrinho.total(),
             endereco: endereco
         }
-
     },
 
     total: () => {
@@ -122,7 +148,7 @@ export let carrinho = {
 
     },
 
-    setRetirada: (nRetirada)=>{
+    setRetirada: (nRetirada) => {
         carrinho.retirada.metodo = nRetirada.metodo;
         carrinho.retirada.acressimo = nRetirada.acressimo;
         return carrinho.retirada;

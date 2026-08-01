@@ -1,20 +1,15 @@
-import { sequencia } from "./carrinho.js";
 
-
-
-function bebida(name, vol, valor, imagem) {
+export function Bebida(name, vol, valor = 0, imagem) {
     let nome = name;
-    let preco = 0;
+    let preco = valor;
     let src = imagem;
     let volume = vol;
-    let id = sequencia();
-    let quantidade = 0;
 
     return {
         getNome: () => nome,
         setNome: (n) => nome = n,
 
-        getPreco: () => preco,
+        getPreco: () => { return preco },
         setPreco: (valor) => preco = valor,
 
         getSrc: () => src,
@@ -26,21 +21,12 @@ function bebida(name, vol, valor, imagem) {
         getId: () => id,
         setId: (i) => { return id = i },
 
-        getQuantidade: () => { return quantidade },
-        soma: () => { return quantidade++ },
-        subtracao: () => {
-            if (quantidade > 0) {
-                quantidade--;
-            } return quantidade;
-        },
-
         getAnotacao: () => {
             let obj = {
                 nome: nome,
                 preco: preco,
                 src: src,
                 volume: volume,
-                id: id
             }
 
             return obj;
@@ -48,11 +34,28 @@ function bebida(name, vol, valor, imagem) {
     }
 }
 
+export const listaBebidas = [
+    item("coca lata",    "350ml", 5, "../imagens/bebidas/coca-lata.webp"),
+    item("kuat lata",    "350ml", 3, "../imagens/bebidas/kuat-lata.webp"),
+    item("guaraná lata", "350ml", 4, "../imagens/bebidas/foto.png"),
+    item("água mineral", "500ml", 2, "../imagens/bebidas/foto.png"),
+    item("suco laranja", "300ml", 6, "../imagens/bebidas/foto.png"),
+    item("cerveja lata", "350ml", 7, "../imagens/bebidas/foto.png"),
+    item("chá gelado"  , "500ml", 5, "../imagens/bebidas/foto.png"),
 
+    // Garrafas
+    item("coca garrafa", "2L", 12, "../imagens/bebidas/foto.png"),
+    item("guaraná garrafa", "2L", 11, "../imagens/bebidas/foto.png"),
+    item("água mineral garrafa", "1,5L", 4, "../imagens/bebidas/foto.png"),
+    item("suco uva garrafa", "1L", 9, "../imagens/bebidas/foto.png"),
+    item("cerveja garrafa", "600ml", 10, "../imagens/bebidas/foto.png")
+];
 
-export function listaBebidas() {
-    return [
-        bebida("coca", "350ml", 5, "../../imagens/bebidas/coca-lata.webp"),
-        bebida("Guaraná Kuat", "350ml", 3, "../../imagens/bebidas/kuat-lata.webp"),
-    ];
+function item(nome, vol, valor, imagem) {//objeto que garante padronização dos modelos de refrigerante
+    return {
+        nome: nome,
+        vol: vol,
+        valor: valor,
+        imagem: imagem
+    }
 }
