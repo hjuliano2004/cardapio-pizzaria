@@ -20,12 +20,11 @@ export function rendPizzas() {
 
     listaPizzas = [];
     root.innerHTML = "";
-    adotar(root, [barraSuperior])
+    adotar(root, [barraSuperior, section])
     btnRetorno.innerText = "";
     tipoPizza.innerText = "Pizzas";
     adotar(section, [ul]);
     adotar(btnRetorno, [retorno]);
-    adotar(root, [section]);
     div_carrinho.innerText = "";
     adotar(div_carrinho, [btn_carrinho])
 
