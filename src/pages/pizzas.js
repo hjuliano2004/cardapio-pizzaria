@@ -4,8 +4,9 @@ import { adotar, dom } from "../utils/adotar.js";
 import { btn_retorno } from "../utils/Retorno.js";
 import { navigate } from "../utils/Router.js";
 import { formatCoins } from "../utils/utils.js";
+import { btn_carrinho } from "./Carrinho.js";
 import { renderListaSabores } from "./sabores.js";
-import { barraSuperior, btnRetorno, tipoPizza } from "./superior.js";
+import { barraSuperior, btnRetorno, div_carrinho, tipoPizza } from "./superior.js";
 
 let listaPizzas = [];
 
@@ -19,11 +20,14 @@ export function rendPizzas() {
 
     listaPizzas = [];
     root.innerHTML = "";
+    adotar(root, [barraSuperior])
     btnRetorno.innerText = "";
-    tipoPizza.innerText = "Pizzas"
-    adotar(section, [barraSuperior, ul]);
+    tipoPizza.innerText = "Pizzas";
+    adotar(section, [ul]);
     adotar(btnRetorno, [retorno]);
     adotar(root, [section]);
+    div_carrinho.innerText = "";
+    adotar(div_carrinho, [btn_carrinho])
 
     listaPizzas.push(Pizza("Broto", 4, 1, 30));
     listaPizzas.push(Pizza("Média", 8, 2, 40));
@@ -32,14 +36,13 @@ export function rendPizzas() {
     listaPizzas.push(Pizza("Extra Gigante", 20, 4, 70));
 
 
-
     for (let i = 0; i < listaPizzas.length; i++) {
-        ul.appendChild(listaPizzas[i]);
+        ul.appendChild(listaPizzas[i])
     }
 
 }
 
-function limpa() {
+function limpa() {//limpa a lista <ul> de pizzas
     let ul = document.getElementsByClassName("pizzas");
 
     for (let i = 0; i < ul.length; i++) {
@@ -48,7 +51,7 @@ function limpa() {
 }
 
 
-export function Pizza(tipo, qPedacos, qSabores, preco) {
+export function Pizza(tipo, qPedacos, qSabores, preco) {//cria itens <li> pra usar na lista <ul> depizzas
     const li = dom("li");
 
     const titulo = dom("h2", tipo);

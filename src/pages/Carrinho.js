@@ -4,22 +4,24 @@ import { adotar, dom } from "../utils/adotar.js";
 import { Proximo } from "../utils/proximo.js";
 import { navigate } from "../utils/Router.js";
 import { formatCoins } from "../utils/utils.js";
+import { acoesBebida, img, infoBebida } from "./bebidas.js";
 import { comprarMais } from "./header.js";
 import { atualizarTotal, divProximo, listaInferior, sectionInferior } from "./inferior.js";
 import { objPizza } from "./pizzas.js";
 import { barraSuperior, btnRetorno, div_carrinho, tipoPizza } from "./superior.js";
 
-const section = document.createElement("section");
-const ul = document.createElement("ul");
 export const btn_carrinho = BtnCarrinho();
-ul.id = "pizza_carrinho";
-ul.classList.add("carrinho");
-section.appendChild(ul);
-section.classList.add("carrinho");
+//const section = document.createElement("section");
+const section = dom("section", "", { class: "carrinho" })
+const ul = dom("ul", "", { id: "pizza_carrinho" })
+const ul2 = dom("ul", "", { class: "carrinho_bebidas" });
+
+
+adotar(section, [ul, ul2]);
 
 const pagamento = Proximo();
 
-function posicao(pizza) {
+function posicao(pizza) {//renderiza uma posição <li> na lista <ul> de pizzas por vez
     const li = dom("li", "", { class: "sabores_carrinho" });
 
     const div = dom("div", "", { style: "width:70%" });
@@ -126,20 +128,49 @@ function excluir(pizza) {
     return btn;
 }
 
-function listaSabores(pizza) {
+function listaSabores(pizza) {//retorna lista <ul> com sabores pertencentes a uma pizza especifica
 
     let lista = pizza.getSabores();
 
-    let sabores = document.createElement("ul");
+    let sabores = dom("ul");
 
     for (let i = 0; i < lista.length; i++) {
-        let li = document.createElement("li");
-        li.innerText = lista[i];
-        sabores.appendChild(li);
+        adotar(sabores, [dom("li", `${lista[i]}`)])
     }
 
     return sabores;
 }
+
+function bebidaLi(bebida, nomes) {
+
+    for(let i=0;i<nomes.length;i++){
+        if(nomes[i] === bebida.getNome()){
+            return null;
+        }
+    }
+
+    const li = dom("li");
+    
+    const div = dom("div", "", { class: "container1" });
+
+    const div2 = acoesBebida(bebida);
+    div2.classList.add("carrinho-container");
+
+    const info = infoBebida(bebida);
+
+    adotar(div, [img(bebida.getSrc()), info]);
+
+    adotar(ul, [adotar(li, [div, div2])]);
+
+
+    li.style.display = "flex"
+    li.style.paddingRight = "10%"
+    li.style.boxShadow = "1px 1px 3px black";
+
+    nomes.push(bebida.getNome())
+    //por razões desconhecidas o css não consegue estilizar esse <li>
+}
+
 
 pagamento.addEventListener('click', () => {
 
@@ -148,13 +179,23 @@ pagamento.addEventListener('click', () => {
     navigate(router, "/#retirada");//TODO precisa levar pra pagina de escolhas
 });
 
-function visualizacao() {
+
+
+function visualizacao() {//função que gerencia a renderização das listas de pizza e bebidas
 
     ul.innerText = "";
+    ul2.innerHTML = "";
+
+    let nomes = [];
 
     for (let i = 0; i < carrinho.pizzas.length; i++) {
         posicao(carrinho.pizzas[i]);
     }
+
+    for (let i = 0; i < carrinho.bebidas.length; i++) {
+        bebidaLi(carrinho.bebidas[i], nomes)
+    }
+
 }
 
 
@@ -184,26 +225,17 @@ function mensagemVazio() {
 
     const classe = "carrinho-vazio"
 
-    if (!carrinho.pizzas.length && !qBebidas()) {//se os valores forem zero, ele considera o carrinho vazio
+    if (!carrinho.pizzas.length && !carrinho.bebidas.length) {//se os valores forem zero, ele considera o carrinho vazio
         adotar(ul, [
-            dom("div", "o carrinho está vazio", { class:  classe})
+            dom("div", "o carrinho está vazio", { class: classe })
         ])
     } else {
         let d = document.getElementsByClassName(classe);
-        for(let i=0;i<d.length;i++){
+        for (let i = 0; i < d.length; i++) {
             d[i].remove();
         }
-        
-    }
-}
 
-function qBebidas(){//avalia se as bebidas do carrinho tem algum valor selecionado
-    let numero = 0;
-    let lista = carrinho.bebidas;
-    for(let i=0;i<lista.length;i++){
-        numero += lista[i].getQuantidade();
     }
-    return numero;
 }
 
 

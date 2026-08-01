@@ -42,6 +42,7 @@ export function domNs(ns, tipo = "svg", texto = "", attrs = {}) {//se usa apenas
 
 
 
+
 /* Exemplo de uso:
 const container = dom("section", "", { id: "principal", class: "container" });
 const titulo = dom("h1", "Bem-vindo!", { class: "titulo" });
