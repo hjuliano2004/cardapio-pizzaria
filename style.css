@@ -186,6 +186,7 @@ header button:hover {
 .pizzas {
   text-align: center;
   padding: 0;
+  padding-top: 5%;
 }
 
 
@@ -838,6 +839,10 @@ select {
   #sabores_pizza {
     padding-top: 20%;
     padding-bottom: 40%;
+  }
+
+  .pizzas{
+    padding-top: 15%;
   }
 
 

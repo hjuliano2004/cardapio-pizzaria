@@ -53,9 +53,9 @@ ${pix(obj)}
     
 Observações: ${comentario}
 Resumo: ${carrinho.pizzas.length} pizzas, ${carrinho.bebidas.length} bebidas`;
-    /*TODO preciso implementar uma variavel  com observações do cliente*/
+    
 
-    // whatsapp(msg);
+     whatsapp(msg);
 
     return msg;
 }
