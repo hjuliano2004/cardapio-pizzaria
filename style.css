@@ -879,12 +879,14 @@ select {
     padding-top: 10%;
   }
 
+
   #ul-bebidas {
-    padding-bottom: 20%;
+    padding-top: 10%;
+    padding-bottom: 25%;
   }
 
   #sect_metodo{
-    padding-top: 10%;
+    padding-top: 20%;
   }
 
 }
