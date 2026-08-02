@@ -35,7 +35,7 @@ export function Bebida(name, vol, valor = 0, imagem) {
 }
 
 export const listaBebidas = [
-    item("coca lata",    "350ml", 5, "/imagens/bebidas/file.png"),
+    item("coca lata",    "350ml", 5, "./imagens/bebidas/file.png"),
     item("kuat lata",    "350ml", 3, "/imagens/bebidas/kuat-lata.webp"),
     item("guaraná lata", "350ml", 4, "/imagens/bebidas/foto.png"),
     item("água mineral", "500ml", 2, "/imagens/bebidas/foto.png"),
