@@ -37,6 +37,7 @@ export function Bebida(name, vol, valor = 0, imagem) {
 export const listaBebidas = [
     item("coca lata",    "350ml", 5, "./imagens/bebidas/file.png"),
     item("kuat lata",    "350ml", 3, "./imagens/bebidas/kuat-lata.webp"),
+    /*
     item("guaraná lata", "350ml", 4, "./imagens/bebidas/foto.png"),
     item("água mineral", "500ml", 2, "./imagens/bebidas/foto.png"),
     item("suco laranja", "300ml", 6, "./imagens/bebidas/foto.png"),
@@ -49,6 +50,7 @@ export const listaBebidas = [
     item("água mineral garrafa", "1,5L", 4, "./imagens/bebidas/foto.png"),
     item("suco uva garrafa", "1L", 9, "./imagens/bebidas/foto.png"),
     item("cerveja garrafa", "600ml", 10, "./imagens/bebidas/foto.png")
+    */
 ];
 
 function item(nome, vol, valor, imagem) {//objeto que garante padronização dos modelos de refrigerante
