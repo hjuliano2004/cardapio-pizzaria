@@ -15,9 +15,9 @@ const retorno = btn_retorno("/");
 const section = dom("section");
 
 export function rendPizzas() {
-   // limpa();
+    section.innerHTML = "";
     const ul = dom("ul", "", { class: "pizzas" });
-
+    
     listaPizzas = [];
     root.innerHTML = "";
     adotar(root, [barraSuperior, section])
@@ -39,14 +39,6 @@ export function rendPizzas() {
         ul.appendChild(listaPizzas[i])
     }
 
-}
-
-function limpa() {//limpa a lista <ul> de pizzas
-    let ul = document.getElementsByClassName("pizzas");
-
-    for (let i = 0; i < ul.length; i++) {
-        ul[i].remove();
-    }
 }
 
 
