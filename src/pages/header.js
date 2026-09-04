@@ -12,7 +12,7 @@ export const comprarMais = maisBtn();
 
 // Imagem de destaque
 const imagemDestaque = dom("img", "", { id: "imagem_destaque", src: "./imagens/pizza.png" });
-const titulo = dom("h1", "Papadelli");
+const titulo = dom("h1", "Pizzaria");
 
 // Div endereço
 const mapsLink = dom("a", "Rua Tuiuti, 1270, Iririu, Joinville - SC, 89227-473", {
